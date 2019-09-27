@@ -4,12 +4,10 @@ COLORS = cbrewer('qual', 'Set2', 10);
 
 [groupsMatrix, namesMatrix] =  groupmice4(micedb, 'Matrix');
 datMatrix = cellfun(@(group) getgroupdata(analysisdb, group), groupsMatrix, 'UniformOutput', false);
-datMatrixMean = cellfun(@(animal) cellfun(@nanmean, animal), datMatrix, 'UniformOutput', false);
 
 matrixIdxs = ~cellfun(@isempty, datMatrix);
 datMatrix = datMatrix(matrixIdxs);
 namesMatrix = namesMatrix(matrixIdxs);
-datMatrixMean = datMatrixMean(matrixIdxs);
 
 figure;
 hold on;

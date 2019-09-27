@@ -21,6 +21,6 @@ for i = 1:n
         scatter(xs' + ones(1,length(datum))*i, datum, 'k*');
     end
 end
-ploterr(1:n, cellfun(@nanmean, dat), [], cellfun(@std_error, dat) , 'k.', 'abshhxy', 0);
+ploterr(1:n, cellfun(@nanmean, dat), [], cellfun(@std_error, dat), 'k.', 'abshhxy', 0);
 set(gca, 'xtick', 1:n, 'xticklabel', names);
 end

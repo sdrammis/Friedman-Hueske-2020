@@ -4,12 +4,9 @@ COLORS = cbrewer('qual', 'Set2', 10);
 
 [groupsStrio, namesStrio] =  groupmice4(micedb, 'Strio');
 datStrio = cellfun(@(group) getgroupdata(analysisdb, group), groupsStrio, 'UniformOutput', false);
-datStrioMean = cellfun(@(animal) cellfun(@nanmean, animal), datStrio, 'UniformOutput', false);
-
 strioIdxs = ~cellfun(@isempty, datStrio);
 datStrio = datStrio(strioIdxs);
 namesStrio = namesStrio(strioIdxs);
-datStrioMean = datStrioMean(strioIdxs);
 
 figure;
 hold on;
