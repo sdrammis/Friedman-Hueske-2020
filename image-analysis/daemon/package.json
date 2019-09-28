@@ -1,0 +1,29 @@
+{
+  "name": "daemon",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon --exec ./node_modules/.bin/ts-node -- ./src/index.ts",
+    "build": "rm -rf build && ./node_modules/.bin/tsc",
+    "prod": "node ./build/src/index.js"
+  },
+  "author": "sdrammis",
+  "license": "proprietary",
+  "devDependencies": {
+    "@types/bluebird": "^3.5.24",
+    "@types/lowdb": "^1.0.6",
+    "@types/mkdirp-promise": "^5.0.0",
+    "@types/mz": "0.0.32",
+    "nodemon": "^1.18.4",
+    "ts-node": "^7.0.1",
+    "typescript": "^3.0.3"
+  },
+  "dependencies": {
+    "bluebird": "^3.5.2",
+    "chalk": "^2.4.1",
+    "lowdb": "^1.0.0",
+    "mkdirp-promise": "^5.0.1",
+    "mz": "^2.7.0"
+  }
+}

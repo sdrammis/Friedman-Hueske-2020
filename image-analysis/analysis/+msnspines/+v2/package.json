@@ -1,0 +1,14 @@
+{
+  "name": "spine_analysis",
+  "version": "1.0.0",
+  "description": "",
+  "main": "makeMask.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "kaden",
+  "license": "ISC",
+  "dependencies": {
+    "canvas": "^2.5.0"
+  }
+}

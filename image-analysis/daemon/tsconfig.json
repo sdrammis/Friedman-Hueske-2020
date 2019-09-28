@@ -1,0 +1,11 @@
+{
+  "compilerOptions": {
+    "outDir": "./build",
+    "target": "ES2017",
+    "module": "commonjs",
+    "noImplicitAny": true,
+    "sourceMap": true
+  },
+  "include": ["src/**/*"],
+  "exclude": ["build", "node_modules"]
+}

@@ -1,0 +1,23 @@
+{
+  "name": "striomatrix-cv-extra",
+  "version": "1.0.0",
+  "description": "Utilities and libs for striomatrix-cv",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "scripts": {
+    "build": "rm -rf dist && ./node_modules/.bin/tsc"
+  },
+  "author": "Sabrina Drammis",
+  "license": "Proprietory",
+  "dependencies": {
+    "amqplib": "^0.5.2",
+    "mz": "^2.7.0",
+    "node-xlsx": "^0.12.1",
+    "typescript": "^3.1.3"
+  },
+  "devDependencies": {
+    "@types/amqplib": "^0.5.9",
+    "@types/mz": "0.0.32",
+    "@types/node": "^10.11.6"
+  }
+}
