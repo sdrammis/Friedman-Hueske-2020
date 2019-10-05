@@ -1,3 +1,6 @@
+% Load files: light_twdb_2019-08-08_spikes.mat, miceType.mat,
+% dreaddgroups.mat
+
 STRIOSOMALITY = 'Strio';
 HEALTH = 'WT';
 CNO_VALS = [0.3 0.6 1];
