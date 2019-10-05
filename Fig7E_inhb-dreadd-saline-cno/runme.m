@@ -45,7 +45,6 @@ fprintf('ttest p = %d \n', ttestp);
 fprintf('signrank p = %d \n', signrankp);
 fprintf('obsersvation = CNO/Saline pairing (# = %d) \n', n);
 
-
 function plot_(A)
 hold on;
 for k=1:size(A,1)
