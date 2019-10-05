@@ -9,33 +9,35 @@ datMatrixAll = get_group_spikes(twdb, groupsMatrix{1}, PERIOD, 'all', USE_FIRST_
 
 figure;
 ax1 = subplot(1,2,1);
-plot_group(datStrioAll);
+[nStrio, spikesStrio] = plot_group(datStrioAll);
 title(sprintf('Strio, period=%s', PERIOD));
 ax2 = subplot(1,2,2);
-plot_group(datMatrixAll);
+[nMatrix, spikesMatrix] = plot_group(datMatrixAll);
 title(sprintf('Matrix, period=%s', PERIOD));
 linkaxes([ax1,ax2],'y')
 
-x1 = datStrioAll(:,1);
-y1 = datStrioAll(:,2);
+x1 = spikesStrio(:,1);
+y1 = spikesStrio(:,2);
 [~,ttestp1] = ttest(x1,y1);
 signrankp1 = signrank(x1,y1);
 fprintf('strio ttest p = %d \n', ttestp1);
 fprintf('strio signrank p = %d \n', signrankp1);
-fprintf('strio obsersvation = mouse (# = %d) \n', size(datStrioAll,1));
+fprintf('strio obsersvation = mouse (# = %d) \n', nStrio);
 
-x2 = datMatrixAll(:,1);
-y2 = datMatrixAll(:,2);
+x2 = spikesMatrix(:,1);
+y2 = spikesMatrix(:,2);
 [~,ttestp2] = ttest(x2,y2);
 signrankp2 = signrank(x2,y2);
 fprintf('matrix ttest p = %d \n', ttestp2);
 fprintf('matrix signrank p = %d \n', signrankp2);
-fprintf('matrix obsersvation = mouse (# = %d) \n', size(datMatrixAll,1));
+fprintf('matrix obsersvation = mouse (# = %d) \n', nMatrix);
 
-function plot_group(dat)
+function [n, spikes] = plot_group(dat)
 hold on;
 spikes = dat(~(isnan(dat(:,1)) | isnan(dat(:,2))),:);
-for ii=1:size(spikes,1)
+n = size(spikes,1);
+
+for ii=1:n
     plot([1 2], spikes(ii,:), 'k*-');
 end
 ylabel('Spike Rate');
