@@ -1,6 +1,6 @@
-DATA_PATH = '/annex4/afried/resultfiles/analysis_output/vglut_kian/detection_data/Grade_5';
-STRIO_PATH = '/annex4/afried/resultfiles/system-tree/strio_analysis/done';
-IMGS_PATH = '/annex4/afried/resultfiles/FINAL_EXPORTED_IMAGES';
+DATA_PATH = '//chunky.mit.edu/annex4/afried/resultfiles/analysis_output/vglut_kian/detection_data/Grade_5';
+STRIO_PATH = '//chunky.mit.edu/annex4/afried/resultfiles/system-tree/strio_analysis/done';
+IMGS_PATH = '//chunky.mit.edu/annex4/afried/resultfiles/FINAL_EXPORTED_IMAGES';
 
 addpath(genpath('./lib'));
 load('./dbs/dimensions.mat');

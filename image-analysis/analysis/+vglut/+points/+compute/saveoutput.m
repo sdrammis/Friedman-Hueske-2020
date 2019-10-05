@@ -1,5 +1,6 @@
 function saveoutput(micedb, slicename, s, u, t)
-OUT_DIR = '/annex4/afried/resultfiles/analysis_output/vglut_kian/output';
+% OUT_DIR = '/annex4/afried/resultfiles/analysis_output/vglut_kian/output/';
+OUT_DIR = 'F:/vglut_points_output';
 
 % Get mouse info.
 mouseID = vglut.points.compute.find_mouseID(slicename);
