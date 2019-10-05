@@ -2,3 +2,5 @@ data
 tmp
 *.m~
 *.asv
+.python-version
+**/__pycache__/**
