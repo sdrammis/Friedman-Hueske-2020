@@ -4,8 +4,8 @@ USE_FIRST_TASK = 1;
 groupsStrio = groupmice(miceType, 'Strio');
 groupsMatrix = groupmice(miceType, 'Matrix');
     
-% datStrioAll = get_group_spikes(twdb, groupsStrio{1}, PERIOD, 'all', USE_FIRST_TASK);
-% datMatrixAll = get_group_spikes(twdb, groupsMatrix{1}, PERIOD, 'all', USE_FIRST_TASK); 
+datStrioAll = get_group_spikes(twdb, groupsStrio{1}, PERIOD, 'all', USE_FIRST_TASK);
+datMatrixAll = get_group_spikes(twdb, groupsMatrix{1}, PERIOD, 'all', USE_FIRST_TASK); 
 
 figure;
 ax1 = subplot(1,2,1);
