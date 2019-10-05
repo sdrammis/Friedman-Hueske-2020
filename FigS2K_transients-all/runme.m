@@ -1,3 +1,5 @@
+% Load files: light_twdb_2019-08-08_spikes.mat, miceType.mat
+
 PERIOD = 'all';
 USE_FIRST_TASK = 1;
 
