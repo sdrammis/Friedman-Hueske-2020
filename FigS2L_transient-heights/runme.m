@@ -5,7 +5,7 @@ USE_FIRST_TASK = 1;
 
 groupsStrio = groupmice(miceType, 'Strio');
 groupsMatrix = groupmice(miceType, 'Matrix');
-
+  
 datStrioAll = get_group_spikes(twdb, groupsStrio{1}, PERIOD, 'all', USE_FIRST_TASK);
 datMatrixAll = get_group_spikes(twdb, groupsMatrix{1}, PERIOD, 'all', USE_FIRST_TASK); 
 
@@ -54,14 +54,13 @@ avgSpikesStart = nan(1,n);
 avgSpikesEnd = nan(1,n);
 
 for ii=1:n
-    spikes = get_spikes(twdb, group{ii}, period, eng, useFirstTask);
-    
+    spikes = get_spike_heights(twdb, group{ii}, period, eng, useFirstTask);
     lgth = length(spikes);
-    if length(spikes) < 5
+    if lgth < 5
         continue;
     end
     avgSpikesStart(ii) = nanmean(spikes(1:floor(lgth/3)));
-    avgSpikesEnd(ii) = nanmean(spikes(floor(2*lgth/3):end));
+    avgSpikesEnd(ii) = nanmean(spikes);
 end
 
 ret = [avgSpikesStart' avgSpikesEnd'];
