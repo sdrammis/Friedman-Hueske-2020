@@ -15,13 +15,13 @@ subplot(1,2,1);
 plotbars(datStrio, namesStrio, COLORS, 'nodots');
 xlabel('Groups');
 ylabel('# Putative Terminals');
-sgtitle(['PVMSN - STRIO - CELLS - ' newline ...
+title(['PVMSN - STRIO - CELLS - ' newline ...
     mktitle(namesStrio, nStrioAnimals, datStrio)]);
 subplot(1,2,2);
 plotbars(datMatrix, namesMatrix, COLORS, 'nodots');
 xlabel('Groups');
 ylabel('# Putative Terminals');
-sgtitle(['PVMSN - MATRIX - CELLS - ' newline ...
+title(['PVMSN - MATRIX - CELLS - ' newline ...
     mktitle(namesMatrix, nMatrixAnimals, datMatrix)]);
 
 function [data, nAnimals] = getgroupdata(analysisdb, group)
