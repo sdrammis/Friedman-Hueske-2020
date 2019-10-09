@@ -18,8 +18,8 @@ legend('Strio Density', 'Matrix Density');
 ylabel('# cells / mm^2');
 title('MSN Densities - Mice Observation (E15)');
 
-x1 = strioE11{1};
-y1 = matrixE11{1};
+x1 = strioE15{1};
+y1 = matrixE15{1};
 [~,ttestp1] = ttest2(x1,y1);
 signrankp1 = ranksum(x1,y1);
 nS1 = sum(~isnan(x1));
@@ -28,8 +28,8 @@ fprintf('DLX -- ttest p = %d \n', ttestp1);
 fprintf('DLX-- signrank p = %d \n', signrankp1);
 fprintf('# strio animals = %d, # matrix animals = %d \n', nS1, nM1);
 
-x2 = strioE11{2};
-y2 = matrixE11{2};
+x2 = strioE15{2};
+y2 = matrixE15{2};
 [~,ttestp2] = ttest2(x2,y2);
 signrankp2 = ranksum(x2,y2);
 nS2 = sum(~isnan(x2));
