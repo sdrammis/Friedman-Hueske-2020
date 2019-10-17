@@ -1,0 +1,91 @@
+>>>~~~------Matrix------~~~<<<
+------------Tests for C------------
+C Water vs. Sucrose: Significance: 0, p-val: 0.14707
+C Water vs. Base: Significance: 0, p-val: 0.42531
+C Sucrose vs. Base: Significance: 0, p-val: 0.11181
+------------Tests for DP------------
+DP Water vs. Sucrose: Significance: 0, p-val: 0.88183
+DP Water vs. Base: Significance: 0, p-val: 0.61489
+DP Sucrose vs. Base: Significance: 0, p-val: 0.71265
+------------Tests for Traces------------
+~~~Different Trace within Same Treatment Group~~~
+>>>Water<<<
+Water R-C vs. R+C: Significance: 0, p-val: 0.52604
+Water R-C vs. R: Significance: 0, p-val: 0.52604
+Water R-C vs. C: Significance: 0, p-val: 0.88223
+Water R+C vs. R: Significance: 0, p-val: 0.52604
+Water R+C vs. C: Significance: 0, p-val: 0.17875
+Water R vs. C: Significance: 0, p-val: 0.52842
+>>>Sucrose<<<
+Sucrose R-C vs. R+C: Significance: 0, p-val: 0.42869
+Sucrose R-C vs. R: Significance: 0, p-val: 0.42869
+Sucrose R-C vs. C: Significance: 0, p-val: 0.71484
+Sucrose R+C vs. R: Significance: 0, p-val: 0.42869
+Sucrose R+C vs. C: Significance: 0, p-val: 0.13695
+Sucrose R vs. C: Significance: 0, p-val: 0.47462
+>>>Base<<<
+Base R-C vs. R+C: Significance: 0, p-val: 0.95535
+Base R-C vs. R: Significance: 0, p-val: 0.95535
+Base R-C vs. C: Significance: 0, p-val: 0.62946
+Base R+C vs. R: Significance: 0, p-val: 0.95535
+Base R+C vs. C: Significance: 0, p-val: 0.078711
+Base R vs. C: Significance: 0, p-val: 0.32502
+~~~Same Trace Across Different Treatment Groups~~~
+R-C Trace Water vs. Sucrose: Significance: 0, p-val: 0.86002
+R-C Trace Water vs. Base: Significance: 0, p-val: 0.50755
+R-C Trace Sucrose vs. Base: Significance: 0, p-val: 0.34518
+R+C Trace Water vs. Sucrose: Significance: 0, p-val: 0.46447
+R+C Trace Water vs. Base: Significance: 0, p-val: 0.55438
+R+C Trace Sucrose vs. Base: Significance: 0, p-val: 0.50594
+Reward Trace Water vs. Sucrose: Significance: 0, p-val: 0.60523
+Reward Trace Water vs. Base: Significance: 0, p-val: 0.95277
+Reward Trace Sucrose vs. Base: Significance: 0, p-val: 0.71138
+Cost Trace Water vs. Sucrose: Significance: 0, p-val: 0.27771
+Cost Trace Water vs. Base: Significance: 0, p-val: 0.46566
+Cost Trace Sucrose vs. Base: Significance: 0, p-val: 0.40586
+
+>>>~~~------Strio------~~~<<<
+------------Tests for C------------
+C Water vs. Sucrose: Significance: 0, p-val: 0.17246
+C Water vs. Base: Significance: 1, p-val: 6.0932e-05
+C Sucrose vs. Base: Significance: 1, p-val: 0.00049227
+------------Tests for DP------------
+DP Water vs. Sucrose: Significance: 0, p-val: 0.056221
+DP Water vs. Base: Significance: 1, p-val: 0.0085825
+DP Sucrose vs. Base: Significance: 0, p-val: 0.058892
+------------Tests for Traces------------
+~~~Different Trace within Same Treatment Group~~~
+>>>Water<<<
+Water R-C vs. R+C: Significance: 0, p-val: 0.5362
+Water R-C vs. R: Significance: 0, p-val: 0.5362
+Water R-C vs. C: Significance: 1, p-val: 0.039826
+Water R+C vs. R: Significance: 0, p-val: 0.5362
+Water R+C vs. C: Significance: 0, p-val: 0.062584
+Water R vs. C: Significance: 1, p-val: 0.013232
+>>>Sucrose<<<
+Sucrose R-C vs. R+C: Significance: 0, p-val: 0.096026
+Sucrose R-C vs. R: Significance: 0, p-val: 0.096026
+Sucrose R-C vs. C: Significance: 1, p-val: 0.003677
+Sucrose R+C vs. R: Significance: 0, p-val: 0.096026
+Sucrose R+C vs. C: Significance: 0, p-val: 0.051383
+Sucrose R vs. C: Significance: 1, p-val: 0.0011233
+>>>Base<<<
+Base R-C vs. R+C: Significance: 0, p-val: 0.477
+Base R-C vs. R: Significance: 0, p-val: 0.477
+Base R-C vs. C: Significance: 1, p-val: 0.014502
+Base R+C vs. R: Significance: 0, p-val: 0.477
+Base R+C vs. C: Significance: 1, p-val: 0.000515
+Base R vs. C: Significance: 1, p-val: 0.00061748
+~~~Same Trace Across Different Treatment Groups~~~
+R-C Trace Water vs. Sucrose: Significance: 0, p-val: 0.10241
+R-C Trace Water vs. Base: Significance: 0, p-val: 0.11768
+R-C Trace Sucrose vs. Base: Significance: 0, p-val: 0.58033
+R+C Trace Water vs. Sucrose: Significance: 0, p-val: 0.31437
+R+C Trace Water vs. Base: Significance: 0, p-val: 0.30498
+R+C Trace Sucrose vs. Base: Significance: 0, p-val: 0.18881
+Reward Trace Water vs. Sucrose: Significance: 0, p-val: 0.57001
+Reward Trace Water vs. Base: Significance: 1, p-val: 0.042312
+Reward Trace Sucrose vs. Base: Significance: 0, p-val: 0.17199
+Cost Trace Water vs. Sucrose: Significance: 0, p-val: 0.092436
+Cost Trace Water vs. Base: Significance: 0, p-val: 0.77591
+Cost Trace Sucrose vs. Base: Significance: 0, p-val: 0.51363
