@@ -3,7 +3,7 @@ function [miceTrials,rewardTones,costTones,numSessions] = get_mouse_trials(twdb,
     miceTrials = cell(1,length(miceIDs));
     for m = 1:length(miceIDs)
         mouseID = miceIDs{m};
-        sessionIdx = get_mouse_sessions(twdb,mouseID,~reversal,1,'all',0);
+        sessionIdx = get_mouse_sessions(twdb,mouseID,~reversal,0,'all',0);
         if ~isempty(sessionIdx)
             mouseTrials = table;
             for idx = sessionIdx
