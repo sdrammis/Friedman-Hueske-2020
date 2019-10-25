@@ -19,6 +19,29 @@ xlabel('# Putative Terminals');
 title('Avgeraged CDF');
 title(['Strio - ' mktitle(namesStrio, datStrio)]);
 
+SAMPLE_N = 10000;
+sampWTLY = groupsample(datStrio{1}, SAMPLE_N);
+sampWTLO = groupsample(datStrio{2}, SAMPLE_N);
+sampWTNL = groupsample(datStrio{3}, SAMPLE_N);
+sampHDNL = groupsample(datStrio{4}, SAMPLE_N);
+
+[~, p1] = kstest2(sampWTLO, sampWTLY);
+[~, p2] = kstest2(sampWTLO, sampWTNL);
+[~, p3] = kstest2(sampWTLO, sampHDNL);
+fprintf('WTLO v WTLY, WTNL, HDNL, p = %.5f, p = %.5f, p = %.5f \n', p1, p2, p3);
+
+function ret = groupsample(group, n)
+ret = [];
+for i=1:length(group)
+   ret = [ret randsample(group{i}, n)];
+end
+end
+
+function ret = randsample(x, n)
+idxs = randi(length(x), 1, n);
+ret = x(idxs); 
+end
+
 function data = getgroupdata(analysisdb, group)
 data = {};
 for i=1:length(group)
