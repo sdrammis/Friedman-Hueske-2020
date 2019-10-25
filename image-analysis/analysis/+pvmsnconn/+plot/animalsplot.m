@@ -51,8 +51,6 @@ legend(namesStrio);
 title('Averaged PDF');
 sgtitle(['Strio - ' mktitle(namesStrio, datStrio, datStrioMean)]);
 
-return
-
 figure;
 subplot(2,2,[1,3]);
 hold on;
@@ -84,8 +82,6 @@ for i=1:length(group)
     if isempty(blobs)
         continue;
     end
-
-    mouse.ID
     blobs = blobs(~isnan(blobs));
     data{end+1} = blobs;
 end
