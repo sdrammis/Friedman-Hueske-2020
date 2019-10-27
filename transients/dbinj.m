@@ -6,9 +6,11 @@ files = dir([conf.GRADES_DIR filesep '*.mat']);
 for iFile=1:size(files,1)
     file = files(iFile);
     fname = file.name;
-    trialSpikes = {};
     
     fprintf('Progress %d/%d ... \n', iFile, size(files,1));
+    
+    varnames = {'trialIDX', 'StartTime', 'PeakTime', 'Grade', 'Group'};
+    trialSpikes = table(0, 0, 0, 0, 0, 'VariableNames', varnames);
     
     splits = strsplit(strrep(fname, '.mat', ''), '_');
     row = str2double(splits{2}(4:end));
@@ -37,25 +39,13 @@ for iFile=1:size(files,1)
         trialEnd = trialsData{iTrial, 'ITIEndTime'};
         trialSpikeIdx = find(spikeTimes(spikeTimes <= trialEnd) >= trialStart);        
         if isempty(trialSpikeIdx)
-            trialSpikes{iTrial} = [];
             continue;
         end
         
-        spikesInTrial = cell(length(trialSpikeIdx),6);
-        spikesInTrial(:,1:5) = sessionSpikes(trialSpikeIdx,1:5);
- 
-        burstIdxs = find(~cellfun(@isempty,spikesInTrial(:,4)));
-        if ~isempty(burstIdxs)
-            trialBurstTimes = unique([spikesInTrial{burstIdxs,4}]);
-            for burstIdx = burstIdxs'
-                burstTime = spikesInTrial{burstIdx,4};
-                burstN = find(trialBurstTimes == burstTime);
-                spikesInTrial{burstIdx,6} = burstN;
-            end
-        end
-         
-        varnames = {'StartTime', 'PeakTime', 'Grade', 'BurstStartTime', 'Group', 'BurstNumber'};
-        trialSpikes{iTrial} = cell2table(spikesInTrial, 'VariableNames', varnames);
+        spikesInTrial = cell(length(trialSpikeIdx),length(varnames));
+        spikesInTrial(:,1) = {iTrial};
+        spikesInTrial(:,2:5) = sessionSpikes(trialSpikeIdx,[1 2 3 5]);
+        trialSpikes = [trialSpikes; cell2table(spikesInTrial, 'VariableNames', varnames)];
     end
-    twdb(row).trialSpikes = trialSpikes;
+    twdb(row).trialSpikes = trialSpikes(2:end,:);
 end

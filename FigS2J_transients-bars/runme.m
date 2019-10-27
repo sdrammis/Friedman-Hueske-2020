@@ -1,18 +1,18 @@
 % Load files: light_twdb_2019-08-08_spikes.mat, miceType.mat
 
-PERIOD = 'tone+response';
-USE_FIRST_TASK = 1;
-ENG = 'all';
-
-groupsStrio = groupmice(miceType, 'Strio');
-groupsMatrix = groupmice(miceType, 'Matrix');
-
-datStrioNum_ = get_groups_spikes(twdb, groupsStrio, PERIOD, ENG, USE_FIRST_TASK);
-datStrioNum = filter_mice([datStrioNum_{1}; datStrioNum_{2}], [groupsStrio{1} groupsStrio{2}]);
-datMatrixNum_ = get_groups_spikes(twdb, groupsMatrix, PERIOD, ENG, USE_FIRST_TASK);
-datMatrixNum = filter_mice([datMatrixNum_{1}; datMatrixNum_{2}], [groupsMatrix{1} groupsMatrix{2}]);
-datNum = {datStrioNum(:,2), datMatrixNum(:,2)};
-
+% PERIOD = 'tone+response';
+% USE_FIRST_TASK = 1;
+% ENG = 'all';
+% 
+% groupsStrio = groupmice(miceType, 'Strio');
+% groupsMatrix = groupmice(miceType, 'Matrix');
+% 
+% datStrioNum_ = get_groups_spikes(twdb, groupsStrio, PERIOD, ENG, USE_FIRST_TASK);
+% datStrioNum = filter_mice([datStrioNum_{1}; datStrioNum_{2}], [groupsStrio{1} groupsStrio{2}]);
+% datMatrixNum_ = get_groups_spikes(twdb, groupsMatrix, PERIOD, ENG, USE_FIRST_TASK);
+% datMatrixNum = filter_mice([datMatrixNum_{1}; datMatrixNum_{2}], [groupsMatrix{1} groupsMatrix{2}]);
+% datNum = {datStrioNum(:,2), datMatrixNum(:,2)};
+% 
 datStrioHeights_ = get_groups_spikes_heights(twdb, groupsStrio, PERIOD, ENG, USE_FIRST_TASK);
 datStrioHeights = filter_mice([datStrioHeights_{1}; datStrioHeights_{2}], [groupsStrio{1} groupsStrio{2}]);
 datMatrixHeights_ = get_groups_spikes_heights(twdb, groupsMatrix, PERIOD, ENG, USE_FIRST_TASK);

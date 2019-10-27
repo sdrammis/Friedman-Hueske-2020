@@ -26,9 +26,14 @@ end
 n = size(sessions,2);
 heights = nan(1,n);
 for ii=1:n
-    trialData = sessions(ii).trialData;
-    trialSpikes = sessions(ii).trialSpikes;
-    if isempty(trialSpikes) || ~ismember('Engagement', trialData.Properties.VariableNames)
+    trialData_ = sessions(ii).trialData;
+    if isempty(trialData_)
+        continue;
+    end
+    
+    trialData_.trialIDX = (1:height(trialData_))';
+    trialSpikes_ = sessions(ii).trialSpikes;
+    if isempty(trialSpikes_) || ~ismember('Engagement', trialData_.Properties.VariableNames)
         continue;
     end
     
@@ -44,12 +49,15 @@ for ii=1:n
     % filtered and smoothed)
     
     if ~strcmp(eng, 'all')
-        engIdxs = trialData.Engagement == eng;
-        trialData = trialData(engIdxs,:);
-        trialSpikes = trialSpikes(engIdxs);
+        engIDXs = find(trialData_.Engagement == eng);
+        trialData = trialData_(engIDXs,:);
+        trialSpikes = trialSpikes_(ismember(trialSpikes_.trialIDX, engIDXs),:);
         if isempty(trialSpikes)
             continue;
         end
+    else
+        trialData = trialData_;
+        trialSpikes = trialSpikes_;
     end
     
     switch period
@@ -68,15 +76,14 @@ for ii=1:n
     end
     
     spikeHeights = [];
-    for jj=1:length(trialSpikes)
-        if trialData{jj,'StimulusID'} ~= rewardTone || isempty(trialSpikes{jj})
+    for jj=1:height(trialData)
+        spikes = trialSpikes(trialSpikes.trialIDX == trialData.trialIDX(jj),:);
+        if trialData.StimulusID(jj) ~= rewardTone || isempty(spikes)
             continue;
         end
         
-        spikes = removevars(trialSpikes{jj}, {'BurstStartTime', 'BurstNumber'});
         cleanSpikes = spikes(spikes.Grade >= SPIKE_GRADE_THRESH, :);
         periodSpikes = cleanSpikes(cleanSpikes.PeakTime >= s(jj) & cleanSpikes.PeakTime <= t(jj),:);
-        
         for k=1:size(periodSpikes,1)
            spike = periodSpikes(k,:);
            spikeTrace = extractedSpikes{spike.StartTime == [extractedSpikes{:,1}],7};
