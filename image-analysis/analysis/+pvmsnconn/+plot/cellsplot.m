@@ -1,6 +1,6 @@
 % load('/home/sdrammis/Dropbox (MIT)/striomatrix-analysis/dbs/analysisdb.mat');
 % load('./dbs/analysisdb-countstmp.mat');
-load('/home/sdrammis/Dropbox (MIT)/striomatrix-analysis/dbs/micedb.mat');
+% load('/home/sdrammis/Dropbox (MIT)/striomatrix-analysis/dbs/micedb.mat');
 
 COLORS = cbrewer('qual', 'Set2', 10);
 
