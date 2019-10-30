@@ -1,0 +1,11 @@
+function p = ttest_QZ(d1,d2,dispStr)
+% see documentation for ttest2_QZ. Similar, but for paired t test
+d1 = d1(isfinite(d1));
+d2 = d2(isfinite(d2));
+if isempty(d1) || isempty(d2)
+    disp([dispStr,'Not enough information.']);
+else
+    [h,p] = ttest(d1,d2);
+    disp([dispStr,'Significance: ',num2str(h),', p-val: ',num2str(p)]);
+end
+end
