@@ -42,7 +42,7 @@ for p = 1:numPerformances
 
     end
 
-    ageStr = {['Young (age<=' num2str(ageCutoff) ')'],['Old (age>' num2str(ageCutoff) ')']};
+    ageStr = {['Old (age>' num2str(ageCutoff) ')']};
     periodStr = {'Learning','Post learning','All Trials'};
 
     
