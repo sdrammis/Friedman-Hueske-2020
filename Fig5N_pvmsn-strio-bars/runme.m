@@ -1,4 +1,4 @@
-% Load files: analysisdb_pvmsn.mat, micedb.mat
+% Load files: analysisdb.mat, micedb.mat
 COLORS = cbrewer('qual', 'Set2', 10);
 
 [groupsStrio, namesStrio] = groupmice4(micedb, 'Strio');
@@ -40,7 +40,7 @@ for i=1:length(group)
     if isempty(blobs)
         continue;
     end
-    
+        
     data = [data blobs(~isnan(blobs))];
     nAnimals = nAnimals + 1;
 end

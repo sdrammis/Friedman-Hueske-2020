@@ -70,6 +70,9 @@ for ii=1:n
         case 'response'
             s = trialData.ToneStartTime + TONE_DURATION;
             t = trialData.OutcomeStartTime;
+        case 'tone+response'
+            s = trialData.ToneStartTime;
+            t = trialData.OutcomeStartTime;
         case 'outcome+ITI'
             s = trialData.OutcomeStartTime;
             t = trialData.OutcomeStartTime + TONE_DURATION * 5;
