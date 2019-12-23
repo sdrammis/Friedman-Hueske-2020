@@ -83,26 +83,14 @@ mouseIDs(nanIdxs) = [];
 nWaterTrials(nanIdxs) = [];
 nSucroseTrials(nanIdxs) = [];
 nBaseTrials(nanIdxs) = [];
-figure() % Plot rts and cts
-subplot(1,2,1)
-for i = 1:length(RTWater)
+figure() % Plot c
+for i = 1:length(CWater)
     hold on
-    plotNoBar_UPDATE2({RTBase{i},RTWater{i}},'Reward Trace',{'Base','Water'},...
-        strioStr,'b','b','b',0,0)
+    plotNoBar_UPDATE2({CBase(i),CWater(i)},'C',{'Base','Deval'},strioStr,...
+        'b','b','b',1,0)
     hold on
-    plotNoBar_UPDATE2({RTBase{i},RTSucrose{i}},'Reward Trace',{'Base','Sucrose'},...
-        strioStr,'r','r','r',0,0)
-    hold off
-    hold off
-end
-subplot(1,2,2)
-for i = 1:length(CTWater)
-    hold on
-    plotNoBar_UPDATE2({CTBase{i},CTWater{i}},'Cost Trace',{'Base','Water'},...
-        strioStr,'b','b','b',0,0)
-    hold on
-    plotNoBar_UPDATE2({CTBase{i},CTSucrose{i}},'Cost Trace',{'Base','Sucrose'},...
-        strioStr,'r','r','r',0,0)
+    plotNoBar_UPDATE2({CBase(i),CSucrose(i)},'C',{'Base','Deval'},strioStr,...
+        'r','r','r',1,0)
     hold off
     hold off
 end

@@ -1,4 +1,5 @@
 
 
-% load('light_twdb_2019-08-08.mat')
-devalPlots(twdb)
+%  load('light_twdb_2019-06-06.mat')
+
+striosomalityLicks(twdb)

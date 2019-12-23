@@ -1,4 +1,4 @@
 
 
-load('twdb.mat');
-DeltaSucrosePlot(twdb)
+% load('light_twdb_2018-07-25.mat')
+representativeMeanCDF(twdb,'HD')

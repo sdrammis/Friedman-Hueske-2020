@@ -1,7 +1,8 @@
 % Author: QZ
 % 08/29/2019
 function [nanIdxs,mouseIDs,CSaline,CDZP,CBase,DSaline,DDZP,DBase,...
-    RTSaline,RTDZP,RTBase,CTSaline,CTDZP,CTBase] = calcAndPlotDZPUPDATE2_QZ(twdb,...
+    RTSaline,RTDZP,RTBase,CTSaline,CTDZP,CTBase,nSaline,nDZP,...
+    nBase] = calcAndPlotDZPUPDATE2_QZ(twdb,...
     mouseIDs,rTones,cTones,numSessions,strioStr,dzpData)
 CSaline = zeros(1,length(mouseIDs));
 CDZP = zeros(1,length(mouseIDs));
@@ -16,6 +17,9 @@ CTSaline = cell(1,length(mouseIDs));
 CTDZP = cell(1,length(mouseIDs));
 CTBase = cell(1,length(mouseIDs));
 nanIdxs = [];
+nSaline = zeros(1,length(mouseIDs));
+nDZP = zeros(1,length(mouseIDs));
+nBase = zeros(1,length(mouseIDs));
 for i = 1:length(mouseIDs)
     msID = mouseIDs{i};
     disp(['------' num2str(i) ': Mouse ' msID '------']);
@@ -34,6 +38,8 @@ for i = 1:length(mouseIDs)
     baseFluorData = getFluorTrialsFromIdx_QZ(twdb,msID,baseIdx,baseTrialData);
     [dpBase,rTraceBase,cTraceBase,cBase,~,~] = get_dprime_traceArea_UPDATE2(baseTrialData,...
         baseFluorData,rTone,cTone);
+    nDZP(i) = height(dzpTrialData);
+    nBase(i) = height(baseTrialData);
     CBase(i) = cBase;
     DBase(i) = dpBase;
     RTBase{i} = rTraceBase;
@@ -50,6 +56,7 @@ for i = 1:length(mouseIDs)
         salineFluorData = getFluorTrialsFromIdx_QZ(twdb,msID,salIdx,salineTrialData);
         [dpSaline,rtSaline,ctSaline,cSaline,~,~] = get_dprime_traceArea_UPDATE2(salineTrialData,...
             salineFluorData,rTone,cTone);
+        nSaline(i) = height(salineTrialData);
     else
         salineBeforeTrialData = twdb(salIdx(1)).trialData;
         salineAfterTrialData = twdb(salIdx(2)).trialData;
@@ -65,6 +72,7 @@ for i = 1:length(mouseIDs)
         dpSaline = nanmean([dpSalineBefore,dpSalineAfter]);
         rtSaline = nanmean([rTraceSalineBefore',rTraceSalineAfter']);
         ctSaline = nanmean([cTraceSalineBefore',cTraceSalineAfter']);
+        nSaline(i) = height(salineBeforeTrialData) + height(salineAfterTrialData);
     end
     CSaline(i) = cSaline;
     DSaline(i) = dpSaline;
@@ -91,19 +99,14 @@ CTSaline(nanIdxs) = [];
 CTDZP(nanIdxs) = [];
 CTBase(nanIdxs) = [];
 mouseIDs(nanIdxs) = [];
-figure() % Plot reward and cost traces
-subplot(1,2,1)
-for i = 1:length(RTDZP)
+nSaline(nanIdxs) = [];
+nDZP(nanIdxs) = [];
+nBase(nanIdxs) = [];
+figure() % Plot c
+for i = 1:length(CDZP)
     hold on
-    plotNoBar_UPDATE2({RTSaline{i},RTDZP{i}},'Reward Trace',{'Saline','DZP'},...
-        strioStr,'b','b','b',0,0)
-    hold off
-end
-subplot(1,2,2)
-for i = 1:length(CTDZP)
-    hold on
-    plotNoBar_UPDATE2({CTSaline{i},CTDZP{i}},'Cost Trace',{'Saline','DZP'},...
-        strioStr,'b','b','b',0,0)
+    plotNoBar_UPDATE2({CSaline(i),CDZP(i)},'C',{'Saline','DZP'},strioStr,...
+        'b','b','b',1,0)
     hold off
 end
 end

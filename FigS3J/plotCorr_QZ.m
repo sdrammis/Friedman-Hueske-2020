@@ -23,22 +23,7 @@ end
 % ylabel(yLab);
 % xlabel(xLab)
 % title(titleStr);
-% if colAges
-%     for i = 1:length(x)
-%         if ages(i) <= 8
-%             scatter(x(i),y(i),'Marker',markerSymbol,'MarkerEdgeColor',...
-%                 markerColors{1});
-%         elseif ages(i) >= 9 && ages(i) <= 12
-%             scatter(x(i),y(i),'Marker',markerSymbol,'MarkerEdgeColor',...
-%                 markerColors{2});
-%         else % ages(i) >=13
-%             scatter(x(i),y(i),'Marker',markerSymbol,'MarkerEdgeColor',...
-%                 markerColors{3});
-%         end
-%     end
-% else
     scatter(x,y,'Marker',markerSymbol,'MarkerEdgeColor',markerColor);
-% end
 [fittedX,fittedY,cor,pval,m,~] = corrReg(x,y);
 l = plot(fittedX,fittedY,'Color',lineColor,'DisplayName',...
     [plotName ': r=' num2str(cor) ', pval=' num2str(pval) ', m=' num2str(m)]);

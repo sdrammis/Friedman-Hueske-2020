@@ -3,7 +3,6 @@ function [miceTrials,miceFluorTrials,rewardTones,costTones,numSessions] = get_al
     miceTrials = cell(1,length(miceIDs));
     for m = 1:length(miceIDs)
         mouseID = miceIDs{m};
-        disp(['------' num2str(m) ': ' mouseID '------'])
         sessionIdx = get_mouse_sessions(twdb,mouseID,~reversal,0,'all',0);
         
         mouseTrials = table;
@@ -26,6 +25,11 @@ function [miceTrials,miceFluorTrials,rewardTones,costTones,numSessions] = get_al
                 zSessFluor = zscore_baseline(sessFluorTrials(i, :), sessFluorAll);
                 fluorTrials = [fluorTrials; zSessFluor];
             end
+%             figure
+%             hold on
+%             plot(twdb(idx).raw405Session(:,1),twdb(idx).raw405Session(:,2),'m')
+%             plot(twdb(idx).raw470Session(:,1),twdb(idx).raw470Session(:,2),'b')
+%             title([mouseID,' IDX: ' num2str(idx)])
         end
 
         if upToLearned
@@ -43,6 +47,7 @@ function [miceTrials,miceFluorTrials,rewardTones,costTones,numSessions] = get_al
                 end
             end
         end
+        
         miceTrials{m} = mouseTrials;
         miceFluorTrials{m} = fluorTrials;
         rewardTones(m) = twdb(idx).rewardTone;

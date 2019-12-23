@@ -1,16 +1,25 @@
-function [dPrime,responseTraceArea,rewardPlusCost,responseRewardTraceSum,responseCostTraceSum,c,tpr,fpr] = get_dprime_traceArea(mouseTrials,mouseFluorTrials,rewardTone,costTone)
-% From Helper Functions 
+function [dPrime,responseTraceArea,responseRewardCostTraceSum,responseRewardTraceSum,responseCostTraceSum,c,tpr,fpr,lrr,lrc] = get_dprime_traceArea(mouseTrials,mouseFluorTrials,rewardTone,costTone,threshold)
+ 
     responsePeriod = 39:46;
     [rewardTrials,costTrials,rewardFluorTrials,costFluorTrials] = reward_and_cost_trials(mouseTrials,mouseFluorTrials,rewardTone,costTone);
- 
-    [tpr,fpr,dPrime,c] = dprime_and_c_licks(rewardTrials.ResponseLickFrequency,costTrials.ResponseLickFrequency);
+    % lick rates
+    lrr = mean(rewardTrials.ResponseLickFrequency);
+    lrc = mean(costTrials.ResponseLickFrequency);
+    % stats based on threshold
+    if threshold == 1
+        [tpr,fpr,dPrime,c] = dprime_and_c_licks(rewardTrials.ResponseLickFrequency,costTrials.ResponseLickFrequency);
+    elseif threshold == 2
+        [tpr,fpr,dPrime,c] = dprime_and_c_licks2(rewardTrials.ResponseLickFrequency,costTrials.ResponseLickFrequency);
+    else % threshold == 3
+        [tpr,fpr,dPrime,c] = dprime_and_c_licks3(rewardTrials.ResponseLickFrequency,costTrials.ResponseLickFrequency);
+    end
  
     [mReward, ~, ~] = get_dist_stats(rewardFluorTrials);
     [mCost, ~, ~] = get_dist_stats(costFluorTrials);
     responseRewardTrace = mReward(responsePeriod);
     responseCostTrace = mCost(responsePeriod);
     responseTraceArea = sum(responseRewardTrace-responseCostTrace);
-    rewardPlusCost = sum(responseRewardTrace+responseCostTrace);
+    responseRewardCostTraceSum = sum(responseRewardTrace+responseCostTrace);
     responseRewardTraceSum = sum(responseRewardTrace);
     responseCostTraceSum = sum(responseCostTrace);
 end

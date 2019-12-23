@@ -1,4 +1,4 @@
 
 
-% load('light_twdb_2018-07-25.mat')
-representativeMeanCDF(twdb,'HD')
+% load('light_twdb_2019-06-06.mat')
+TrialsToLearn(twdb)

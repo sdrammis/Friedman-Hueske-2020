@@ -1,4 +1,4 @@
 
 
-% load('light_twdb_2019-06-06.mat')
-engagementProportionAcrossTimeGroups(twdb,3)
+load('twdb.mat');
+SucrosePlotter(twdb)

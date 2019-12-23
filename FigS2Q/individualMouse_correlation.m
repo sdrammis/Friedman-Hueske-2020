@@ -1,5 +1,5 @@
 function individualMouse_correlation(twdb,miceIDs,plotType,engagement,learningPeriod)
-    
+
     learned = 1;
     if ~isequal('all',learned) 
         if learned
@@ -111,6 +111,6 @@ function individualMouse_correlation(twdb,miceIDs,plotType,engagement,learningPe
         animalCorr = [animalCorr cor1];
         animalP = [animalP pval];
         
-    end    
+    end
 
 end

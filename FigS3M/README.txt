@@ -1,8 +1,6 @@
 Script: RUNME.m
 Database: light_twdb_2019-08-08.mat
-Tables: DATATABLE3G.mat, DATATABLE3H.mat, PVALUE3G.mat, PVALUE3H.mat (paired t-test)
-Plotted trial-level reward and cost trace mean for WT Matrix learned mice in:
-G: Devaluation sessions (water, sucrose, base)
-H: DZP sessions (Saline, DZP)
-In the figure: red = sucrose; blue = water
-Base = session during which learning occurs
+Tables: DATATABLE.mat, PVALUES.mat (paired t-test)
+Plotted C for WT Strio learned mice in DZP and saline sessions that were injected w/0.5mg/kg DZP.
+Each session's C is a data point; each mouse is a line plot.
+Saline session is average between previous session and session after diazepam. If missing after, just previous.

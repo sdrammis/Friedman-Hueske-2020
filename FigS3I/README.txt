@@ -1,11 +1,7 @@
 Script: RUNME.m
 Database: light_twdb_2019-08-08.mat
-Table: DATATABLE.mat
-Base = session during which learning occurs
-Water = water devaluation session
-Sucrose = sucrose devaluation session
-In blue:
-Plotted correlation for reward trace sum vs c for difference base-water for learning WT Strio mice.
-==> Reward Trace Sum for Base minus Reward Trace Sum for Water vs C for Base minus C for Water
-In red:
-Plotted correlation for reward trace sum vs c for difference base-sucrose for learning WT Strio mice.
+Tables: DATATABLE.mat, PVALUES.mat (paired t-test)
+Plotted Reward and Cost traces for WT Strio learned mice in base (learning), water, and sucrose sessions.
+The reward and cost trace for each trial for each mouse was plotted.
+Each trial trace value is a scatter point; each mouse is a line plot.
+In the figure: red = sucrose; blue = water

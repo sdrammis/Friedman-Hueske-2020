@@ -1,5 +1,4 @@
 function [m, lowCL, highCL] = get_dist_stats(data)
-% From Helper Functions
     if size(data,1) ~= 1
         std_ = nanstd(data);
         m = nanmean(data);

@@ -1,5 +1,4 @@
 
 
-% load('light_twdb_2019-06-06.mat')
-correlationOverTime_reversal(twdb,{'2610'},'Strio','WT',1,1)
-plot_maxCorrelation(twdb,'Strio','WT',1,1)
+% load('light_twdb_2018-07-25.mat')
+individualMouse_correlation(twdb,{'2795','2712'},'d-prime',1,1)

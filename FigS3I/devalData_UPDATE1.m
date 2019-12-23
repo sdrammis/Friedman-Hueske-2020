@@ -19,5 +19,3 @@ idxs = [cell2mat(twdb_lookup(twdb,'index','key','mouseID',mouseIDs,...
     'key','mouseID',mouseIDs,'key','devaluation','Sucrose'))];
 clear waterIDs sucroseIDs uwi usi nonUWIDs nonUSIDs mouseIDs
 devalData = struct2table(twdb(idxs)); % converted to table because that's what other code expects
-% clear idxs
-% save('devalData_UPDATE1.mat','devalData');

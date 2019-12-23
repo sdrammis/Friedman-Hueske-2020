@@ -1,5 +1,4 @@
-function ttest_QZ(d1,d2,dispStr)
-% see documentation for ttest2_QZ. Similar, but for paired t test
+function p = ttest_QZ(d1,d2,dispStr)
 d1 = d1(isfinite(d1));
 d2 = d2(isfinite(d2));
 if isempty(d1) || isempty(d2)

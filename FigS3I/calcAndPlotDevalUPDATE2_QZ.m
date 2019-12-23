@@ -1,7 +1,8 @@
 % Author: QZ
 % 08/29/2019
 function [nanIdxs,mouseIDs,CWater,CSucrose,CBase,DWater,DSucrose,DBase,...
-    RTWater,RTSucrose,RTBase,CTWater,CTSucrose,CTBase] = calcAndPlotDevalUPDATE2_QZ(twdb,...
+    RTWater,RTSucrose,RTBase,CTWater,CTSucrose,CTBase,nWaterTrials,...
+    nSucroseTrials,nBaseTrials] = calcAndPlotDevalUPDATE2_QZ(twdb,...
     mouseIDs,rTones,cTones,numSessions,strioStr,devalData)
 CWater = zeros(1,length(mouseIDs));
 CSucrose = zeros(1,length(mouseIDs));
@@ -16,6 +17,9 @@ CTWater = cell(1,length(mouseIDs));
 CTSucrose = cell(1,length(mouseIDs));
 CTBase = cell(1,length(mouseIDs));
 nanIdxs = [];
+nWaterTrials = zeros(1,length(mouseIDs));
+nSucroseTrials = zeros(1,length(mouseIDs));
+nBaseTrials = zeros(1,length(mouseIDs));
 for i = 1:length(mouseIDs)
     msID = mouseIDs{i};
     disp(['------' num2str(i) ': Mouse ' msID '------'])
@@ -52,6 +56,9 @@ for i = 1:length(mouseIDs)
     CTWater{i} = cTraceWater;
     CTSucrose{i} = cTraceSucrose;
     CTBase{i} = cTraceBase;
+    nWaterTrials(i) = height(waterTrialData);
+    nSucroseTrials(i) = height(sucroseTrialData);
+    nBaseTrials(i) = height(baseTrialData);
     if sum(sum(~isnan(baseFluorData))) == 0 || ...
             sum(sum(~isnan(waterFluorData))) == 0 || ...
             sum(sum(~isnan(sucroseFluorData))) == 0
@@ -73,85 +80,11 @@ CTWater(nanIdxs) = [];
 CTSucrose(nanIdxs) = [];
 CTBase(nanIdxs) = [];
 mouseIDs(nanIdxs) = [];
-% figure() % Plot c and d'
-% subplot(4,2,1)
-% for i = 1:length(CWater)
-%     hold on
-%     plotNoBar_UPDATE2({CBase(i),CWater(i)},'C',{'Base','Water'},strioStr,...
-%         'b','b','b',1,0)
-%     hold off
-% end
-% subplot(4,2,2)
-% for i = 1:length(CSucrose)
-%     hold on
-%     plotNoBar_UPDATE2({CBase(i),CSucrose(i)},'C',{'Base','Sucrose'},strioStr,...
-%         'r','r','r',1,0)
-%     hold off
-% end
-% subplot(4,2,3)
-% for i = 1:length(DWater)
-%     hold on
-%     plotNoBar_UPDATE2({DBase(i),DWater(i)},'DP',{'Base','Water'},strioStr,...
-%         'b','b','b',1,0)
-%     hold off
-% end
-% subplot(4,2,4)
-% for i = 1:length(DSucrose)
-%     hold on
-%     plotNoBar_UPDATE2({DBase(i),DSucrose(i)},'DP',{'Base','Sucrose'},...
-%         strioStr,'r','r','r',1,0)
-%     hold off
-% end
-% subplot(4,2,5)
-% for i = 1:length(RTWater)
-%     hold on
-%     plotNoBar_UPDATE2({RTBase{i},RTWater{i}},'Reward Trace',{'Base','Water'},...
-%         strioStr,'b','b','b',0,0)
-%     hold off
-% end
-% subplot(4,2,6)
-% for i = 1:length(RTSucrose)
-%     hold on
-%     plotNoBar_UPDATE2({RTBase{i},RTSucrose{i}},'Reward Trace',{'Base','Sucrose'},...
-%         strioStr,'r','r','r',0,0)
-%     hold off
-% end
-% subplot(4,2,7)
-% for i = 1:length(CTWater)
-%     hold on
-%     plotNoBar_UPDATE2({CTBase{i},CTWater{i}},'Cost Trace',{'Base','Water'},strioStr,'b','b','b',0,0)
-%     hold off
-% end
-% subplot(4,2,8)
-% for i = 1:length(CTSucrose)
-%     hold on
-%     plotNoBar_UPDATE2({CTBase{i},CTSucrose{i}},'Cost Trace',{'Base','Sucrose'},strioStr,'r','r','r',0,0)
-%     hold off
-% end
-figure() % Plot c and d'
-subplot(2,2,1)
-for i = 1:length(CWater)
-    hold on
-    plotNoBar_UPDATE2({CBase(i),CWater(i)},'C',{'Base','Water'},strioStr,...
-        'b','b','b',1,0)
-    hold on
-    plotNoBar_UPDATE2({CBase(i),CSucrose(i)},'C',{'Base','Sucrose'},strioStr,...
-        'r','r','r',1,0)
-    hold off
-    hold off
-end
-subplot(2,2,2)
-for i = 1:length(DWater)
-    hold on
-    plotNoBar_UPDATE2({DBase(i),DWater(i)},'DP',{'Base','Water'},strioStr,...
-        'b','b','b',1,0)
-    hold on
-    plotNoBar_UPDATE2({DBase(i),DSucrose(i)},'DP',{'Base','Sucrose'},...
-        strioStr,'r','r','r',1,0)
-    hold off
-    hold off
-end
-subplot(2,2,3)
+nWaterTrials(nanIdxs) = [];
+nSucroseTrials(nanIdxs) = [];
+nBaseTrials(nanIdxs) = [];
+figure() % Plot rts and cts
+subplot(1,2,1)
 for i = 1:length(RTWater)
     hold on
     plotNoBar_UPDATE2({RTBase{i},RTWater{i}},'Reward Trace',{'Base','Water'},...
@@ -162,7 +95,7 @@ for i = 1:length(RTWater)
     hold off
     hold off
 end
-subplot(2,2,4)
+subplot(1,2,2)
 for i = 1:length(CTWater)
     hold on
     plotNoBar_UPDATE2({CTBase{i},CTWater{i}},'Cost Trace',{'Base','Water'},...

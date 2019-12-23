@@ -14,29 +14,18 @@ function nanIds = plotCorrROC3_QZ(x,y,titleStr,xLab,yLab,reverse,plotNames,...
 % each cell array in x/y, e.g. {'WT','HD'}, {'r','b'}
 figure();
 nanIds = cell(1,length(x));
-for i = 1:4
-%     disp(['------' num2str(i) '------']);
-    subplot(2,2,i)
     hold on
-    ylabel(yLab{i});
-    xlabel(xLab{i})
+    ylabel(yLab);
+    xlabel(xLab)
     title(titleStr);
     legendLabs = cell(1,length(x));
     plots = zeros(1,length(x));
-%     disp(size(plots))
     for j = 1:length(x)
-%         disp(['~~~' num2str(j) plotNames{j} '~~~']);
-%         disp(size(x{j}));
-%         disp(size(y{i}{j}));
         hold on
-        [this_x,this_y,nanIdxs,this_cases] = nanFilter_QZ(x{j},y{i}{j},cases{j});
-%         disp(nanIdxs)
+        [this_x,this_y,nanIdxs,this_cases] = nanFilter_QZ(x{j},y{j},cases{j});
         nanIds{j} = [nanIds{j} nanIdxs];
-%         this_ages = ages{j};
-%         this_ages(nanIdxs) = [];
         l = plotCorr_QZ(this_x,this_y,reverse,labCases,this_cases,plotNames{j},...
             markerSymbols{j},markerColors{j},lineColors{j});
-%         l = plotCorr_QZ(x{j},y{i}{j},reverse,0,{},plotNames{j});
         legendLabs{j} = get(l,'DisplayName');
         plots(j) = l;
         hold off
@@ -44,7 +33,6 @@ for i = 1:4
     end
     legend(plots,legendLabs,'Location','Best')
     hold off
-end
 if saveAndClose
 %     figName = titleStr;
 %     saveas(figure(),[pwd '/startEndFigures/' figName '.fig']);
