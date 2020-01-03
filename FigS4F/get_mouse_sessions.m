@@ -44,5 +44,4 @@ function mouse_sessions = get_mouse_sessions(twdb,mouseID,firstTaskType,specialS
             mouse_sessions = mouse_sessions(wantedSessions < firstSpecial_sessionNum);
         end
     end
-    
 end

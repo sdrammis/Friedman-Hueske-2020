@@ -17,7 +17,7 @@ end
 
 
 if ~isequal(age,'all')
-    ageCutoff = 15;
+    ageCutoff = 12;
     if isequal(age,'old')
         mice_idx = cell2mat(twdb_lookup(twdb(mice_idx),'index','grade','firstSessionAge',ageCutoff+1,Inf));
     elseif isequal(age,'young')

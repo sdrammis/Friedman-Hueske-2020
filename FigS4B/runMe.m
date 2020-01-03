@@ -1,4 +1,4 @@
 
 
 % load('light_twdb_2019-06-06.mat')
-SurvivalAnalysis2tr(twdb)
+individualAnimalAnalysis(twdb,'WT','Strio',1,{'2610'})

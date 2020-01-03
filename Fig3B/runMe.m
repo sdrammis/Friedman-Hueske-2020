@@ -1,4 +1,5 @@
 
 
 % load('light_twdb_2019-06-06.mat')
-photometryPerGroupBars(twdb,'Strio','all')
+% load('miceType.mat')
+SurvivalAnalysisTt(twdb,miceType)

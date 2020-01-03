@@ -1,18 +1,19 @@
-function mouse_sessions = get_mouse_sessions(twdb,mouseID,firstTaskType,specialSessions,wantedSessions,reverse)
+function mouse_sessions = get_mouse_sessions(twdb,mouseID,injection,concentration,wantedSessions,reverse)
     
-    firstSessionType = first(twdb_lookup(twdb,'firstSessionType','key','mouseID',mouseID));
-    if ~firstTaskType
-        if isequal(firstSessionType,'tt')
-            taskType = '2tr';
-        elseif isequal(firstSessionType,'2tr')
-            taskType = 'tt';
-        end
-    else
-        taskType = firstSessionType;
-    end
+%     firstSessionType = first(twdb_lookup(twdb,'firstSessionType','key','mouseID',mouseID));
+%     if ~firstTaskType
+%         if isequal(firstSessionType,'tt')
+%             taskType = '2tr';
+%         elseif isequal(firstSessionType,'2tr')
+%             taskType = 'tt';
+%         end
+%     else
+%         taskType = firstSessionType;
+%     end
     
     mouse_sessions = [];
-    sessions_idx = twdb_lookup(twdb,'index','key','mouseID',mouseID,'key','taskType',taskType);
+    sessions_idx = twdb_lookup(twdb,'index','key','mouseID',mouseID,...
+        'key','injection',injection,'key','concentration',concentration);
     sessionNums = [twdb([sessions_idx{:}]).sessionNumber];
 
     [sessionNums,I]=sort(sessionNums);
@@ -31,18 +32,12 @@ function mouse_sessions = get_mouse_sessions(twdb,mouseID,firstTaskType,specialS
     end
 
 
-    if ~specialSessions %don't include sessions after devaluation
-        waterDeval_sessionNum = cell2mat(twdb_lookup(twdb,'sessionNumber','key','mouseID',mouseID,'key','taskType',taskType,'key','devaluation','Water'));
-        sucroseDeval_sessionNum = cell2mat(twdb_lookup(twdb,'sessionNumber','key','mouseID',mouseID,'key','taskType',taskType,'key','devaluation','Sucrose'));
-        cnoInjection_sessionNum = cell2mat(twdb_lookup(twdb,'sessionNumber','key','mouseID',mouseID,'key','taskType',taskType,'key','injection','CNO'));
-        cnoApomorphineInjection_sessionNum = cell2mat(twdb_lookup(twdb,'sessionNumber','key','mouseID',mouseID,'key','taskType',taskType,'key','injection','CNO + Apomorphine'));
-        apomorphineInjection_sessionNum = cell2mat(twdb_lookup(twdb,'sessionNumber','key','mouseID',mouseID,'key','taskType',taskType,'key','injection','Apomorphine'));
-        salineInjection_sessionNum = cell2mat(twdb_lookup(twdb,'sessionNumber','key','mouseID',mouseID,'key','taskType',taskType,'key','injection','Saline'));
-        diazepamInjection_sessionNum = cell2mat(twdb_lookup(twdb,'sessionNumber','key','mouseID',mouseID,'key','taskType',taskType,'key','injection','Diazepam'));
-        firstSpecial_sessionNum = min([waterDeval_sessionNum,sucroseDeval_sessionNum,cnoInjection_sessionNum,cnoApomorphineInjection_sessionNum,apomorphineInjection_sessionNum,salineInjection_sessionNum,diazepamInjection_sessionNum]);
-        if ~isempty(firstSpecial_sessionNum)
-            mouse_sessions = mouse_sessions(wantedSessions < firstSpecial_sessionNum);
-        end
-    end
-    
+%     if ~devaluation %don't include sessions after devaluation
+%         waterDeval_sessionNum = cell2mat(twdb_lookup(twdb,'sessionNumber','key','mouseID',mouseID,'key','taskType',taskType,'key','WaterDevaluation',1));
+%         sucroseDeval_sessionNum = cell2mat(twdb_lookup(twdb,'sessionNumber','key','mouseID',mouseID,'key','taskType',taskType,'key','SucroseDevaluation',1));
+%         firstDeval_sessionNum = min([waterDeval_sessionNum,sucroseDeval_sessionNum]);
+%         if ~isempty(firstDeval_sessionNum)
+%             mouse_sessions = mouse_sessions(wantedSessions < firstDeval_sessionNum);
+%         end
+%     end
 end
