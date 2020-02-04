@@ -1,13 +1,18 @@
 % Load files: light_twdb_2019-08-08_spikes.mat, miceType.mat
 
+warning('off');
+runme_(twdb, miceType, 'all');
+runme_(twdb, miceType, 1);
+
+function runme_(twdb, miceType, eng)
 PERIOD = 'all';
 USE_FIRST_TASK = 1;
 
 groupsStrio = groupmice(miceType, 'Strio');
 groupsMatrix = groupmice(miceType, 'Matrix');
   
-datStrioAll = get_group_spikes(twdb, groupsStrio{1}, PERIOD, 'all', USE_FIRST_TASK);
-datMatrixAll = get_group_spikes(twdb, groupsMatrix{1}, PERIOD, 'all', USE_FIRST_TASK); 
+datStrioAll = get_group_spikes(twdb, groupsStrio{1}, PERIOD, eng, USE_FIRST_TASK);
+datMatrixAll = get_group_spikes(twdb, groupsMatrix{1}, PERIOD, eng, USE_FIRST_TASK); 
 
 figure;
 ax1 = subplot(1,2,1);
@@ -17,6 +22,8 @@ ax2 = subplot(1,2,2);
 [nMatrix, spikesMatrix] = plot_group(datMatrixAll);
 title(sprintf('Matrix, period=%s', PERIOD));
 linkaxes([ax1,ax2],'y')
+
+fprintf(['stats for engagement = ' eng '\n']);
 
 x1 = spikesStrio(:,1);
 y1 = spikesStrio(:,2);
@@ -33,6 +40,7 @@ signrankp2 = signrank(x2,y2);
 fprintf('matrix ttest p = %d \n', ttestp2);
 fprintf('matrix signrank p = %d \n', signrankp2);
 fprintf('matrix obsersvation = mouse (# = %d) \n', nMatrix);
+end
 
 function [n, spikes] = plot_group(dat)
 hold on;
