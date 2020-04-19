@@ -22,15 +22,12 @@ for ii=1:length(s)
     end
     
     spikesCNO = sessionsCNO{1,'SpikesHZ'};
-    diffBest = tern(strcmp(typeDREADD, 'Inhibitory'), Inf, -Inf);
+    diffBest = 0;
     idxBest = 0;
     for jj=1:size(sessionsSaline,1)
         spikesSaline = sessionsSaline{jj,'SpikesHZ'};
         diff = spikesCNO - spikesSaline;
-        if diff < diffBest && strcmp(typeDREADD, 'Inhibitory')
-            idxBest = jj;
-            diffBest = diff;
-        elseif diff > diffBest && strcmp(typeDREADD, 'Excitatory')
+        if abs(diff) >= abs(diffBest)
             idxBest = jj;
             diffBest = diff;
         end
@@ -75,6 +72,8 @@ else
         else
             effect = 'unknown';
         end
+    elseif strcmp(typeDREADD, 'mCherry')
+        effect = 'unknown';
     end
 end
 end
