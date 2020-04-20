@@ -1,6 +1,6 @@
 function ret = analyze_mouse(cal, mouseID, typeDREADD)
-varNames = {'MouseID', 'SpikesHZ', 'SpikesGrades', 'TaskTypes', 'SessionNums', 'SessionNumCNO', 'SessionNumSaline', 'ConctrCNO', 'SpikeRateDiff', 'Effect'};
-ret = table({''}, {[]}, {[]}, {[]}, {[]}, 0, 0, 0, 0, {''}, 'VariableNames', varNames);
+varNames = {'MouseID', 'SpikesHZ', 'SpikesGrades', 'SessionsTimes', 'TaskTypes', 'SessionNums', 'SessionNumCNO', 'SessionNumSaline', 'ConctrCNO', 'SpikeRateDiff', 'Effect'};
+ret = table({''}, {[]}, {[]}, {[]}, 0, {[]}, 0, 0, 0, 0, {''}, 'VariableNames', varNames);
 
 binstr = strrep([num2str(cal.didRun')], '  ', '');
 [~,s] = regexp(binstr,'01');
@@ -40,12 +40,13 @@ for ii=1:length(s)
     taskTypes = {group.TaskType};
     sessionNums = [group.SessionNumber];
     spikesGrades = group.SpikesGrades;
+    sessionsTimes = group.SessionTime;
     sessionNumCNO = sessionsCNO{1,'SessionNumber'};
     sessionNumSaline = sessionsSaline{idxBest,'SessionNumber'};
     conctrCNO = sessionsCNO{1,'Concentration'};
     spikeRateDiff = diffBest;
     effect = find_effect(group, typeDREADD, spikesCNO);
-    ret = [ret; {mouseID, spikesHZ, spikesGrades, taskTypes, sessionNums, sessionNumCNO, sessionNumSaline, conctrCNO, spikeRateDiff, effect}];
+    ret = [ret; {mouseID, spikesHZ, spikesGrades, sessionsTimes, taskTypes, sessionNums, sessionNumCNO, sessionNumSaline, conctrCNO, spikeRateDiff, effect}];
 end
 ret(1,:) = [];
 end
