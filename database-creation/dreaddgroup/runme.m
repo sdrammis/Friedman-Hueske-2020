@@ -28,23 +28,22 @@ NO_TRANSIENTS = { ...
     '4643', '4781', '4783', '4867', '4915', '4957', ...
     };
 
-varNames = {'MouseID', 'SpikesHZ', 'TaskTypes', 'SessionNums', ...
+varNames = {'MouseID', 'SpikesHZ', 'SpikesGrades', 'TaskTypes', 'SessionNums', ...
     'SessionNumCNO', 'SessionNumSaline', 'ConctrCNO', 'SpikeRateDiff', ...
     'Effect', 'hasTransients'};
-groups = table({''}, {[]}, {[]}, {[]}, 0, 0, 0, 0, {''}, -1, 'VariableNames', varNames);
+groups = table({''}, {[]}, {[]}, {[]}, {[]}, 0, 0, 0, 0, {''}, -1, 'VariableNames', varNames);
 for ii=1:length(mice)
     ii
     mouse = mice(ii);
-    mouse.ID
     
     try
-        [nSpikes, spikeTimes, sessions] = get_mouse_spikes(twdb, mouse.ID);
+        [nSpikes, spikeTimes, sessions, spikesGrades] = get_mouse_spikes(twdb, mouse.ID);
     catch
         fprintf('Mouse %s FAILED!!!\n', mouse.ID);
         continue;
     end
     
-    cal = calendarize(nSpikes, spikeTimes, sessions);
+    cal = calendarize(nSpikes, spikeTimes, sessions, spikesGrades);
     groups_ = analyze_mouse(cal, mouse.ID, mouse.DREADDType);
     groups_.hasTransients = repmat(~any(strcmp(mouse.ID, NO_TRANSIENTS)), size(groups_,1),1);
     groups = [groups; groups_];

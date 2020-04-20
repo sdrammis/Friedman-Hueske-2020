@@ -1,4 +1,4 @@
-function [nSpikes, sessionTime, sessions] = get_mouse_spikes(twdb, mouseID)
+function [nSpikes, sessionTime, sessions, spikesGrades] = get_mouse_spikes(twdb, mouseID)
 INJECTIONS = {'CNO', 'Saline', 'Apomorphine', 'CNO + Apomorphine'};
 SPIKE_GRADE_THRESH = 0.55;
 
@@ -23,6 +23,7 @@ end
 n = size(sessions,2);
 nSpikes = nan(1,n);
 sessionTime = nan(1,n);
+spikesGrades = cell(1,n);
 for ii=1:n
     trialData = sessions(ii).trialData;
     trialSpikes = sessions(ii).trialSpikes;
@@ -31,14 +32,16 @@ for ii=1:n
     end
     
     spikes = [];
-    for jj=1:length(trialSpikes)
-        if isempty(trialSpikes{jj}) || trialData{jj, 'StimulusID'} ~= rewardTone
+    for jj=1:size(trialSpikes,1)
+        trialSpikes_ = trialSpikes(trialSpikes.trialIDX == jj,:);
+        if isempty(trialSpikes_) || trialData{jj, 'StimulusID'} ~= rewardTone
             continue;
         end
-        spikes = [spikes; removevars(trialSpikes{jj},{'BurstStartTime', 'BurstNumber'})];
+        spikes = [spikes; trialSpikes_];
     end
     goodSpikes = spikes(spikes.Grade >= SPIKE_GRADE_THRESH, :);
     nSpikes(ii) = size(goodSpikes,1);
     sessionTime(ii) = sum(trialData.ITIEndTime - trialData.TrialStartTime);
+    spikesGrades{ii} = goodSpikes.Grade;
 end
 end
