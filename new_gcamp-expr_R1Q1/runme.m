@@ -1,5 +1,5 @@
-STRIO_PATH = '/annex4/afried/resultfiles/system-tree/strio_analysis/done';
-IMGS_PATH = '/smbshare/analysis3/strio_matrix_cv/Alexander_Emily_Erik/FINAL\ EXPORTED\ IMAGES';
+STRIO_PATH = '/Volumes/annex4/afried/resultfiles/system-tree/strio_analysis/done';
+IMGS_PATH = '/Volumes/smbshare/analysis3/strio_matrix_cv/Alexander_Emily_Erik/FINAL EXPORTED IMAGES';
 
 % Load image real dimensions file
 load('./dimensions.mat');
@@ -33,6 +33,11 @@ for iT=1:size(T,1)
   strioImgPth = [IMGS_PATH '/' experiment '/' slicename '_strio.tiff'];
   strioMsksPth = [STRIO_PATH '/' exid '-masks.mat'];
   strioThrshsPth = [STRIO_PATH '/' exid '-threshs.json'];
+  
+  if ~isfile(strioMsksPth)
+      fprintf('No masks exist for exid %s \n', exid);
+      continue;
+  end
 
   % Get the image pixel size.
   w = dimensions.width(lower(dimensions.slice) == slicename);
@@ -43,6 +48,7 @@ for iT=1:size(T,1)
   end
   realsize = w * h;
 
+  [strio, matrix] = compstriomasks1( strioImgPth, strioMsksPth, strioThrshsPth, realsize);
 end
 
 % 2. Find execution info for the slice
