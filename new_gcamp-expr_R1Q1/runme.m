@@ -1,5 +1,5 @@
-STRIO_PATH = '/Volumes/annex4/afried/resultfiles/system-tree/strio_analysis/done';
-IMGS_PATH = '/Volumes/smbshare/analysis3/strio_matrix_cv/Alexander_Emily_Erik/FINAL EXPORTED IMAGES';
+STRIO_PATH = '/annex4/afried/resultfiles/system-tree/strio_analysis/done';
+IMGS_PATH = '/smbshare/analysis3/strio_matrix_cv/Alexander_Emily_Erik/FINAL EXPORTED IMAGES';
 
 % Load image real dimensions file
 load('./dimensions.mat');
@@ -10,15 +10,11 @@ for iExc=1:length(excsM)
   excsM(iExc).slice = lower(excsM(iExc).slice);
 end
 
-% 1. Iterate through slice names in DC regions spreadsheet
+% Iterate through slice names in DC regions spreadsheet
 T = table2struct(readtable('regions.csv', 'Delimiter', ','));
 for iT=1:size(T,1)
   rowT = T(iT,:);
-  slicename = strrep(rowT.Name, '_msn.tiff', '');
-
-  if strcmp(rowT.Quality, 'poor')
-    continue;
-  end
+  slicename = strrep(rowT.Name, '_vglut.tiff', '');
 
   % Get slice execution information
   idx = twdb_lookup(excsM, 'index', 'key', 'slice', lower(slicename));
@@ -33,7 +29,7 @@ for iT=1:size(T,1)
   strioImgPth = [IMGS_PATH '/' experiment '/' slicename '_strio.tiff'];
   strioMsksPth = [STRIO_PATH '/' exid '-masks.mat'];
   strioThrshsPth = [STRIO_PATH '/' exid '-threshs.json'];
-  
+
   if ~isfile(strioMsksPth)
       fprintf('No masks exist for exid %s \n', exid);
       continue;
