@@ -1,4 +1,4 @@
-function [strio, matrix] = compstriomasks1(imgPth, masksPth, thrshsPth, realsize, varargin)
+function [strio, matrix] = compstriomasks(imgPth, masksPth, thrshsPth, realsize, varargin)
 img = imreadvisible(imgPth);
 
 imgInfo = imfinfo(imgPth);

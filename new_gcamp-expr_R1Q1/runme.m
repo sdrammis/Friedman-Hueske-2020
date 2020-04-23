@@ -1,56 +1,132 @@
-STRIO_PATH = '/annex4/afried/resultfiles/system-tree/strio_analysis/done';
-IMGS_PATH = '/smbshare/analysis3/strio_matrix_cv/Alexander_Emily_Erik/FINAL EXPORTED IMAGES';
+% Load the miceType.mat file
+% Strio and matrix masks are found in the ./mask-data folder.
 
-% Load image real dimensions file
-load('./dimensions.mat');
+MASKS_DIR = './masks-data';
+MSN_DIR = '/Volumes/annex4/afried/resultfiles/system-tree/msn_cell_body_detection/done';
 
-% Load the executions database
-excsM = dbload('./db.json');
-for iExc=1:length(excsM)
-  excsM(iExc).slice = lower(excsM(iExc).slice);
+% STRIO_IMG = '/Volumes/smbshare/analysis3/strio_matrix_cv/Alexander_Emily_Erik/FINAL EXPORTED IMAGES/experiment 1/alexander63xstriosomesfirstcohort2018-08-25 18-50 f-2783_slice1_strio.tiff';
+
+matrixDlxGCaMP = []; % column 1: strio expression, column 2: matrix expr
+matrixMashGCaMP = [];
+strioDlxGCaMP = [];
+strioMashGCaMP = [];
+
+listings = dir([MASKS_DIR '/*-striomasks.mat']);
+for iListing=1:size(listings,1)
+    filename = listings(iListing).name;
+    splits = split(filename, '-striomasks.mat');
+    
+    exid = splits{1};
+    masks = load([MASKS_DIR '/' filename]);
+    msnfilepth = [MSN_DIR '/' exid '-data.mat'];
+    if ~isfile(msnfilepth)
+        continue;
+    end
+    
+    fprintf('Running execution %s...\n', exid);
+    
+    msndata = load([MSN_DIR '/' exid '-data.mat']);
+    striomask = masks.strio;
+    matrixmask = masks.matrix;
+    
+    striodilated = imdilate(striomask, strel('disk',80,8));
+    matrixsubed = matrixmask - striodilated;
+    
+    cells = bwareaopen(msndata.cells, 4000);
+    cellsprops = regionprops(cells, 'all');
+    centroids = [cellsprops.Centroid];
+    centroidsX = centroids(1:2:end-1);
+    centroidsY = centroids(2:2:end);
+    
+    % For debug purposes
+%     strioimg = imreadvisible(STRIO_IMG);
+%     matrixMaskColored = cat(3, matrixsubed*1, matrixsubed*0, matrixsubed*1);
+%     matrixcells = zeros(size(msndata.cells,1),size(msndata.cells,2));
+%     striocells = zeros(size(msndata.cells,1),size(msndata.cells,2));
+
+    striocount = 0;
+    matrixcount = 0;
+    nCells = length(centroidsX);
+    for iCells=1:nCells
+        x = round(centroidsX(iCells));
+        y = round(centroidsY(iCells));
+        if isnan(x) || isnan(y)
+            continue;
+        end
+        cell = bwselect(cells, x, y);
+                        
+        numStrio = nnz(striodilated & cell);
+        numMatrix = nnz(matrixsubed & cell);
+        if numStrio == 0 && numMatrix == 0
+            continue;
+        end
+        
+        if numStrio > 0 
+%             striocells = striocells | cell;
+            striocount = striocount + 1;
+        elseif numMatrix > 0
+%             matrixcells = matrixcells | cell;
+            matrixcount = matrixcount + 1;
+        end
+    end
+    
+%     figure;
+%     imshow(imreadvisible(STRIO_IMG));
+%     hold on;
+%     h = imshow(matrixMaskColored);
+%     bstrio = bwboundaries(striocells);
+%     for k=1:length(bstrio)
+%         b = bstrio{k};
+%         plot(b(:,2),b(:,1),'g','LineWidth',3);
+%     end
+%     bmatrix = bwboundaries(matrixcells);
+%     for k=1:length(bmatrix)
+%         b = bmatrix{k};
+%         plot(b(:,2),b(:,1),'b','LineWidth',3);
+%     end
+%     hold off;
+%     set(h, 'AlphaData', 0.3);
+    
+    splits = strsplit(exid, '_');
+    mouseID = splits{2};
+    mouse = miceType(strcmp({miceType.ID}, mouseID));
+    if isempty(mouse)
+        continue;
+    end
+    striosomality = mouse.intendedStriosomality;
+    genotype = mouse.genotype;
+    if strcmp(striosomality, 'Strio')
+        if strcmp(genotype, 'Dlx')
+            strioDlxGCaMP = [strioDlxGCaMP; striocount matrixcount];
+        elseif strcmp(genotype, 'Mash')
+            strioMashGCaMP = [strioMashGCaMP; striocount matrixcount];
+        end
+    elseif strcmp(striosomality, 'Matrix')
+        if strcmp(genotype, 'Dlx')
+            matrixDlxGCaMP = [matrixDlxGCaMP; striocount matrixcount];
+        elseif strcmp(genotype, 'Mash')
+            matrixMashGCaMP = [matrixMashGCaMP; striocount matrixcount];
+        end
+    end
 end
 
-% Iterate through slice names in DC regions spreadsheet
-T = table2struct(readtable('regions.csv', 'Delimiter', ','));
-for iT=1:size(T,1)
-  rowT = T(iT,:);
-  slicename = strrep(rowT.Name, '_vglut.tiff', '');
+f1 = figure;
+plotbarsgrp({strioDlxGCaMP, strioMashGCaMP, matrixDlxGCaMP, matrixMashGCaMP}, ...
+    {'Strio Dlx', 'Strio Mash', 'Matrix Dlx', 'Matrix Mash'})
+legend({'Strio', 'Matrix'});
+title('Overall GCaMP expression comparison');
 
-  % Get slice execution information
-  idx = twdb_lookup(excsM, 'index', 'key', 'slice', lower(slicename));
-  if isempty(idx)
-     fprintf('No execution found for slice %s !! \n', slicename); 
-     continue;
-  end
-  idx = idx{1};
-  experiment = excsM(idx).experiment;
-  exid = excsM(idx).exid;
+strioDlxNorm = donorm(strioDlxGCaMP);
+strioMashNorm = donorm(strioMashGCaMP);
+matrixDlxNorm = donorm(matrixDlxGCaMP);
+matrixMashNorm = donorm(matrixMashGCaMP);
+f2 = figure;
+plotbars({strioDlxNorm, strioMashNorm, matrixDlxNorm, matrixMashNorm}, ...
+    {'Strio Dlx', 'Strio Mash', 'Matrix Dlx', 'Matrix Mash'}, cbrewer('qual', 'Set2', 10));
+title('GCaMP expression normalized');
 
-  strioImgPth = [IMGS_PATH '/' experiment '/' slicename '_strio.tiff'];
-  strioMsksPth = [STRIO_PATH '/' exid '-masks.mat'];
-  strioThrshsPth = [STRIO_PATH '/' exid '-threshs.json'];
-
-  if ~isfile(strioMsksPth)
-      fprintf('No masks exist for exid %s \n', exid);
-      continue;
-  end
-
-  % Get the image pixel size.
-  w = dimensions.width(lower(dimensions.slice) == slicename);
-  h = dimensions.height(lower(dimensions.slice) == slicename);
-  if isempty(w) || isempty(h)
-      fprintf('Could not find realsie for exid %s!!! \n', exid);
-      continue;
-  end
-  realsize = w * h;
-
-  [strio, matrix] = compstriomasks1( strioImgPth, strioMsksPth, strioThrshsPth, realsize);
+function ret = donorm(dat)
+S = dat(:,1);
+M = dat(:,2);
+ret = (S-M)./(S+M);
 end
-
-% 2. Find execution info for the slice
-% 3. If there is strio data, compute it
-% 4. Apply the strio/matrix masks to the GCaMP image
-% 5. Apply the DC cut to the image
-% 6. Compute densities
-% 7. Compute grades across all densities
-
