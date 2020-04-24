@@ -2,14 +2,16 @@
 % Strio and matrix masks are found in the ./mask-data folder.
 
 MASKS_DIR = './masks-data';
+DEBUG_DIR = './counts-debug';
 MSN_DIR = '/Volumes/annex4/afried/resultfiles/system-tree/msn_cell_body_detection/done';
-
-% STRIO_IMG = '/Volumes/smbshare/analysis3/strio_matrix_cv/Alexander_Emily_Erik/FINAL EXPORTED IMAGES/experiment 1/alexander63xstriosomesfirstcohort2018-08-25 18-50 f-2783_slice1_strio.tiff';
+IMGS_DIR = '/Volumes/smbshare/analysis3/strio_matrix_cv/Alexander_Emily_Erik/FINAL EXPORTED IMAGES';
 
 matrixDlxGCaMP = []; % column 1: strio expression, column 2: matrix expr
 matrixMashGCaMP = [];
 strioDlxGCaMP = [];
 strioMashGCaMP = [];
+
+execsM = dbload('./db.json');
 
 listings = dir([MASKS_DIR '/*-striomasks.mat']);
 for iListing=1:size(listings,1)
@@ -30,7 +32,7 @@ for iListing=1:size(listings,1)
     matrixmask = masks.matrix;
     
     striodilated = imdilate(striomask, strel('disk',80,8));
-    matrixsubed = matrixmask - striodilated;
+    matrixsubed = (matrixmask - striodilated) > 0;
     
     cells = bwareaopen(msndata.cells, 4000);
     cellsprops = regionprops(cells, 'all');
@@ -38,11 +40,14 @@ for iListing=1:size(listings,1)
     centroidsX = centroids(1:2:end-1);
     centroidsY = centroids(2:2:end);
     
-    % For debug purposes
-%     strioimg = imreadvisible(STRIO_IMG);
-%     matrixMaskColored = cat(3, matrixsubed*1, matrixsubed*0, matrixsubed*1);
-%     matrixcells = zeros(size(msndata.cells,1),size(msndata.cells,2));
-%     striocells = zeros(size(msndata.cells,1),size(msndata.cells,2));
+    exec = execsM(strcmp({execsM.exid}, exid));
+    experiment = lower(exec.experiment);
+    slice = lower(exec.slice);
+    strioimg = imreadvisible([IMGS_DIR '/' experiment '/' slice '_strio.tiff']);
+    msnimg = imread([IMGS_DIR '/' experiment '/' slice '_msn.tiff']);
+% %     matrixMaskColored = cat(3, matrixsubed*1, matrixsubed*0, matrixsubed*1);
+    matrixcells = zeros(size(msndata.cells,1),size(msndata.cells,2));
+    striocells = zeros(size(msndata.cells,1),size(msndata.cells,2));
 
     striocount = 0;
     matrixcount = 0;
@@ -70,10 +75,15 @@ for iListing=1:size(listings,1)
         end
     end
     
-%     figure;
-%     imshow(imreadvisible(STRIO_IMG));
+%     f1 = figure('units', 'normalized', 'outerposition', [0 0 1 1]);
+%     imshow(strioimg);
 %     hold on;
-%     h = imshow(matrixMaskColored);
+% %     h = imshow(matrixMaskColored);
+%     bstrio = bwboundaries(striodilated);
+%     for k=1:length(bstrio)
+%         b = bstrio{k};
+%         plot(b(:,2),b(:,1),'r','LineWidth',1);
+%     end
 %     bstrio = bwboundaries(striocells);
 %     for k=1:length(bstrio)
 %         b = bstrio{k};
@@ -84,8 +94,28 @@ for iListing=1:size(listings,1)
 %         b = bmatrix{k};
 %         plot(b(:,2),b(:,1),'b','LineWidth',3);
 %     end
-%     hold off;
-%     set(h, 'AlphaData', 0.3);
+% %     hold off;
+% %     set(h, 'AlphaData', 0.3 * strioimg);
+%     title(exid);
+%     saveas(f1, [DEBUG_DIR '/' exid '-strio.png']);
+%     
+%     f2 = figure('units', 'normalized', 'outerposition', [0 0 1 1]);
+%     imshow(msnimg);
+%     hold on;
+%     bstrio = bwboundaries(striodilated);
+%     for k=1:length(bstrio)
+%         b = bstrio{k};
+%         plot(b(:,2),b(:,1),'g','LineWidth',1);
+%     end
+% %     bmatrix = bwboundaries(matrixsubed);
+% %     for k=1:length(bmatrix)
+% %         b = bmatrix{k};
+% %         plot(b(:,2),b(:,1),'b','LineWidth',1);
+% %     end
+%     title(exid);
+%     saveas(f2, [DEBUG_DIR '/' exid '-msn.png']);
+%     
+%     close all;
     
     splits = strsplit(exid, '_');
     mouseID = splits{2};
@@ -93,6 +123,8 @@ for iListing=1:size(listings,1)
     if isempty(mouse)
         continue;
     end
+    
+    sprintf('Mouse=%s, Intended=%s, actual=%d, Cound strio=%d, count matrix=%d \n', mouse.ID, mouse.intendedStriosomality, mouse.histologyStriosomality, striocount, matrixcount);
     striosomality = mouse.intendedStriosomality;
     genotype = mouse.genotype;
     if strcmp(striosomality, 'Strio')
