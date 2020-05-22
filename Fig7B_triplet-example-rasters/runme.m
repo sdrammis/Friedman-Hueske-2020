@@ -3,6 +3,9 @@
 PAIRS_MATRIX_IDX = 20;
 PAIRS_STRIO_IDX = 1;
 BIN_TIME = 1;
+BIN_1 = [0 1 2];
+BIN_2 = [3 4];
+BIN_3 = [7 10];
 
 pairs_matrix = load('selected_matrix_pairs');
 pairs_strio = load('selected_strio_pairs');
@@ -19,6 +22,7 @@ msn_spikes_matrix = twdb_control(pair_matrix.msn_index).trial_spikes;
 msn_spikes_strio = twdb_control(msn_idx_strio).trial_spikes;
 
 f = figure;
-plot_dynamics(swn_spikes, msn_spikes_strio, msn_spikes_matrix, BIN_TIME, BIN_TIME);
-
+plot_raster(1, swn_spikes, msn_spikes_strio, msn_spikes_matrix, BIN_TIME, BIN_1);
+plot_raster(2, swn_spikes, msn_spikes_strio, msn_spikes_matrix, BIN_TIME, BIN_2);
+plot_raster(3, swn_spikes, msn_spikes_strio, msn_spikes_matrix, BIN_TIME, BIN_3);
 
