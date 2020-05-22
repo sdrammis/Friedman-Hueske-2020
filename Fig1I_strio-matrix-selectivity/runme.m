@@ -1,3 +1,5 @@
+% Load the analysisdb.mat data file
+
 COLORS = cbrewer('qual', 'Set2', 10);
 
 e11Dlx1D1Mice = {'3447', '4233', '3348', '4229'};
@@ -37,22 +39,10 @@ ratioDlxE15 = (strioDlxE15 - matrixDlxE15) ./ (strioDlxE15 + matrixDlxE15);
 ratioMashE15 = (strioMashE15 - matrixMashE15) ./ (strioMashE15 + matrixMashE15);
 
 figure;
-plotbars({ratioDlxE11, ratioMashE11, ratioDlxE15, ratioMashE15}, ...
-    {'e11Dlx1', 'e11Mash1', 'e15Dlx1', 'e15Mash1'}, COLORS);
+plotbars({ratioDlxE11, ratioDlxE15, ratioMashE11, ratioMashE15}, ...
+    {'e11Dlx1', 'e15Dlx1','e11Mash1', 'e15Mash1'}, COLORS);
 ylabel('# cells / mm^2 -- (S-M)/(S+M)');
 title('MSN Densities - Strio v Matrix');
-
-A = [ratioDlxE11; ratioMashE11; ratioDlxE15; ratioMashE15];
-g = {...
-    repmat({'DlxE11'}, 1, length(ratioDlxE11)), ...
-    repmat({'MashE11'}, 1, length(ratioMashE11)), ...
-    repmat({'DlxE15'}, 1, length(ratioDlxE15)), ...
-    repmat({'MashE15'}, 1, length(ratioMashE15))};
-[p,tbl,stats] = anova1(A,horzcat(g{:}),'off');
-
-
-
-disp(p);
 
 function [datStrio, datMatrix, nAnimals] = getgroupdatamice(analysisdb, group)
 datStrio = {[], [], [], [], [], [], []};
