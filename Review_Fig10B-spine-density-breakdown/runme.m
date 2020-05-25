@@ -60,12 +60,18 @@ function [data, nAnimals] = getgroupdata(analysisdb, group, obs)
 data = [];
 nAnimals = 0;
 
+mice = {};
+
 for i=1:length(group)
     mouse = group{i};
     spines = getspines(analysisdb, mouse.ID, obs);
     data = [data spines];
-    if ~isempty(spines); nAnimals = nAnimals + 1; end
+    if ~isempty(spines); nAnimals = nAnimals + 1; mice{end+1} = mouse; end
 end
+
+ages = cellfun(@getperfage, mice);
+fprintf('ages mean = %.3f, stderr = %.3f \n', nanmean(ages), std_error(ages));
+fprintf('ages min = %.3f, max = %.3f \n', min(ages), max(ages));
 end
 
 function ttle = mktitle(names, nAnimals, dat)
