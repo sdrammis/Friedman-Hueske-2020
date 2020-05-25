@@ -1,4 +1,4 @@
-% Load files: analysisdb-spinesV2-2.mat, micedb.mat
+% Load files: analysisdb.mat, micedb.mat
 
 COLORS = cbrewer('qual', 'Set2', 10);
 OBS = 'slice';
