@@ -1,3 +1,5 @@
+% Load files: analysisdb.mat, micedb.mat
+
 groupsMatrixMash4 = groupmice4(micedb, 'Matrix', 'Mash');
 groupsMatrixDlx4  = groupmice4(micedb, 'Matrix', 'Dlx');
 groupsStrioMash4  = groupmice4(micedb, 'Strio', 'Mash');
