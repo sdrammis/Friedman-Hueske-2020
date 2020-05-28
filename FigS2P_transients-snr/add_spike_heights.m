@@ -1,7 +1,7 @@
 SPIKE_PEAK_IDX = 51;
 TIMESTEP = 132.2310;
 
-for itwdb=3381:length(twdb)
+for itwdb=1:length(twdb)
     fprintf('Running twdb row %d...\n', itwdb);
     
     trialspikes = twdb(itwdb).trialSpikes;
@@ -11,12 +11,12 @@ for itwdb=3381:length(twdb)
     
     session470 = twdb(itwdb).raw470Session;
     session405 = twdb(itwdb).raw405Session;
-%     try
+    try
         extractedSpikes = process_session(...
             session470(:,1), session470(:,2), session405(:,1), session405(:,2));
-%     catch
-%         continue;
-%     end
+    catch
+        continue;
+    end
     
     heights = nan(height(trialspikes),1);
     for ispike = 1:height(trialspikes)
