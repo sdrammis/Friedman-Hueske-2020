@@ -1,11 +1,11 @@
 % These paramaters should be updated by hand by consulting the data and 
 % a chi-squared tabled.
 N_STRIO = 35;
-A_STRIO = 49.480;
-B_STRIO = 18.291;
+A_STRIO = 51.966;
+B_STRIO = 19.806;
 N_MATRIX = 77;
-A_MATRIX = 100.839;
-B_MATRIX = 52.942;
+A_MATRIX = 101.999;
+B_MATRIX = 53.782;
 
 striodur = load('./strio_duration.mat');
 matrixdur = load('./matrix_duration.mat');
