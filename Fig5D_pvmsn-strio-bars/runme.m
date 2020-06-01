@@ -1,9 +1,13 @@
 % Load files: analysisdb.mat, micedb.mat
 COLORS = cbrewer('qual', 'Set2', 10);
+CELLS_MOUSE63 = [0 0 1 2 1 1 2 0 0 1 1 0 0 2 1 2 0 0 0 1 1 2 2 0 1];
 
 [groupsStrio, namesStrio] = groupmice4(micedb, 'Strio');
 [datStrio, nStrioAnimals] = ...
     cellfun(@(group) getgroupdata(analysisdb, group), groupsStrio, 'UniformOutput', false);
+% We include a manually counted CTYNL mouse here (ID = 63)
+datStrio{3} = [datStrio{3} CELLS_MOUSE63];
+nStrioAnimals{3} = nStrioAnimals{3} + 1;
 
 figure;
 plotbars(datStrio, namesStrio, COLORS, 'nodots');

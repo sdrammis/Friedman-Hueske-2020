@@ -33,9 +33,9 @@ for iMice=1:length(mice)
    group = 0;
    if strcmp(health, 'WT')
        if age <= 8 && learned
-           group = 1;
-       elseif age >= 16 && learned
            group = 2;
+       elseif age >= 16 && learned
+           group = 1;
        elseif ~learned
            group = 3;
        end
