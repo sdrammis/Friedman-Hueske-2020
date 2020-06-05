@@ -1,0 +1,4 @@
+
+% load('light_twdb_2019-08-08_spikes.mat')
+plot_example_traces_and_licks(twdb,'4104',100,[1 8 17 31],{'Beginning Task','High Licking, No Discrimination','Low Licking, No Discrimination','High Licking, Discrimination'},{[0.2 0.15 0.5 0.58],[0.4 0.28 0.5 0.58],[0.6 0.47 0.5 0.58],[0.8 0.74 0.5 0.58]}, -2,2)
+plot_example_traces_and_licks(twdb,'3758',100,[1 15 19 22 28],{'Beginning Task','Very High Licking','High Licking, No Discrimination','High Licking, Discrimination', 'Low Licking, No Discrimination'},{[0.2 0.17 0.5 0.58],[.35,.45,.5,.58],[0.5 0.53 0.5 0.58],[0.65 0.6 0.5 0.58],[0.85 0.73 0.5 0.58]}, -2,2)
