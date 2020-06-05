@@ -1,6 +1,6 @@
 function [draw, xs] = dynamics(swn_spikes,msn_spikes,bin_time,num_rasters)
 draw = 0;
-[xs, snrs] = utils.snr_clustering(swn_spikes,msn_spikes,bin_time,num_rasters);
+[xs, snrs] = utils.snr_clustering(swn_spikes,msn_spikes,bin_time,num_rasters)
 
 if length(snrs) > 3  
     hold on
@@ -17,8 +17,8 @@ if length(snrs) > 3
 
     FitHandle=plot(fitobj, x, y, 'o');
     set(FitHandle,'color','b');
-    xlabel('Firing Rate (Hz)');
-    ylabel('Striosomal Firing Rate (Hz)');
+    xlabel('Firing Rate(Hz)');
+    ylabel('Matrix Firing Rate(Hz)');
     title(sprintf('Bin=%.2f, R^2=%.3f', bin_time, gof.rsquare));
     b = gca; legend(b,'off');
 
