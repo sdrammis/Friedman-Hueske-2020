@@ -18,7 +18,7 @@ if length(snrs) > 3
     FitHandle=plot(fitobj, x, y, 'o');
     set(FitHandle,'color','b');
     xlabel('SWN Firing Rate in Hz');
-    ylabel('MSN Firing Rate in Hz');
+    ylabel('Striosomal Firing Rate (Hz)');
     title(sprintf('Bin=%.2f, R^2=%.3f', bin_time, gof.rsquare));
     b = gca; legend(b,'off');
 
