@@ -1,0 +1,49 @@
+experiment 1/alexander63xstriosomesfirstcohort2018-08-25 18-50 f-2734_slice1_strio.tiff
+experiment 2/2018-09-02 alexandermatrixfirstcohort-2744_slice1_strio.tiff
+experiment 3/20180922hdproject_striosomes_experiment3_v1-2784_region1_strio.tiff
+experiment 1/alexander63xstriosomesfirstcohort2018-08-25 18-50 f-2734_slice3_strio.tiff
+experiment 2/2018-09-02 alexandermatrixfirstcohort-2745_slice2_strio.tiff
+experiment 3/20180922hdproject_striosomes_experiment3_v1-2788_region2_strio.tiff
+experiment 1/alexander63xstriosomesfirstcohort2018-08-25 18-50 f-2783_slice1_strio.tiff
+experiment 2/2018-09-02 alexandermatrixfirstcohort-2745_slice3_strio.tiff
+experiment 3/20180922hdproject_striosomes_experiment3_v1-2788_region3_strio.tiff
+experiment 1/alexander63xstriosomesfirstcohort2018-08-25 18-50 f-2783_slice2_strio.tiff
+experiment 2/2018-09-02 alexandermatrixfirstcohort-2775_slice1_strio.tiff
+experiment 3/20180922hdproject_striosomes_experiment3_v1-2788_region4_strio.tiff
+experiment 1/alexander63xstriosomesfirstcohort2018-08-25 18-50 f-2783_slice3_strio.tiff
+experiment 2/2018-09-02 alexandermatrixfirstcohort-2775_slice2_strio.tiff
+experiment 4/2018-09-28hdproject_matrix_experiment4v1-2740_slice1_strio.tiff
+experiment 1/alexander63xstriosomesfirstcohort2018-08-25 18-50 f-2787_slice1_strio.tiff
+experiment 2/2018-09-02 alexandermatrixfirstcohort-2775_slice3_strio.tiff
+experiment 4/2018-09-28hdproject_matrix_experiment4v1-2740_slice3_strio.tiff
+experiment 1/alexander63xstriosomesfirstcohort2018-08-25 18-50 f-2787_slice2_strio.tiff
+experiment 2/2018-09-02 alexandermatrixfirstcohort-2826_slice1_strio.tiff
+experiment 4/2018-09-28hdproject_matrix_experiment4v1-2803_slice1_strio.tiff
+experiment 1/alexander63xstriosomesfirstcohort2018-08-25 18-50 f-2787_slice3_strio.tiff
+experiment 2/2018-09-02 alexandermatrixfirstcohort-2833_slice1_strio.tiff
+experiment 4/2018-09-28hdproject_matrix_experiment4v1-2824_slice1_strio.tiff
+experiment 1/alexander63xstriosomesfirstcohort2018-08-25 18-50 f-2791_slice1_strio.tiff
+experiment 2/2018-09-02 alexandermatrixfirstcohort-2833_slice2_strio.tiff
+experiment 4/2018-09-28hdproject_matrix_experiment4v1-2834_slice1_strio.tiff
+experiment 1/alexander63xstriosomesfirstcohort2018-08-25 18-50 f-2791_slice2_strio.tiff
+experiment 2/2018-09-02 alexandermatrixfirstcohort-3758_slice1_strio.tiff
+experiment 4/2018-09-28hdproject_matrix_experiment4v1-2834_slice2_strio.tiff
+experiment 1/alexander63xstriosomesfirstcohort2018-08-25 18-50 f-2791_slice3_strio.tiff
+experiment 2/2018-09-02 alexandermatrixfirstcohort-3758_slice2_strio.tiff
+experiment 4/2018-09-28hdproject_matrix_experiment4v1-2834_slice3_strio.tiff
+experiment 1/alexander63xstriosomesfirstcohort2018-08-25 18-50 f-2795_slice1_strio.tiff
+experiment 2/2018-09-02 alexandermatrixfirstcohort-3758_slice3_strio.tiff
+experiment 5/2018-10-07hdproject_experiment5v1-2593_slice3_strio.tiff
+experiment 1/alexander63xstriosomesfirstcohort2018-08-25 18-50 f-2795_slice2_strio.tiff
+experiment 3/20180922hdproject_striosomes_experiment3_v1-2660_region1_strio.tiff
+experiment 5/2018-10-07hdproject_experiment5v1-2594_slice2_strio.tiff
+experiment 1/alexander63xstriosomesfirstcohort2018-08-25 18-50 f-2795_slice3_strio.tiff
+experiment 3/20180922hdproject_striosomes_experiment3_v1-2660_region2_strio.tiff
+experiment 5/2018-10-07hdproject_experiment5v1-2778_slice1_strio.tiff
+experiment 1/alexander63xstriosomesfirstcohort2018-08-25 18-50 f-region 019_strio.tiff
+experiment 3/20180922hdproject_striosomes_experiment3_v1-2703_region2_strio.tiff
+experiment 6/2018-10-12hdproject_experiment6v1-2712_slice2_strio.tiff
+experiment 1/alexander63xstriosomesfirstcohort2018-08-25 18-50 f-region 020_strio.tiff
+experiment 3/20180922hdproject_striosomes_experiment3_v1-2713_region2_strio.tiff
+experiment 1/alexander63xstriosomesfirstcohort2018-08-25 18-50 f-region 021_strio.tiff
+experiment 3/20180922hdproject_striosomes_experiment3_v1-2713_region3_strio.tiff
