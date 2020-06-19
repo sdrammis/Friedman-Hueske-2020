@@ -1,11 +1,11 @@
 NUM_RASTERS = 4;
 NUM_RASTER_BINS = 20;
 
-swn_idx = 6602;
-msn_idx = 6591;
+swn_idx = 6428;
+msn_idx = 6427;
 swn_spikes = twdb_control(swn_idx).trial_spikes;
 msn_spikes = twdb_control(msn_idx).trial_spikes;
-bin_time = 0.25;
+bin_time = 0.5;
 
 f = figure;
 subplot(2,NUM_RASTERS,1:NUM_RASTERS);
@@ -41,12 +41,12 @@ sgtitle(sprintf('swn idx=%d, msn idx=%d, msn striosomality=%d', swn_idx, msn_idx
 
 %% This is for the snr stats with chisquare test
 f2 = figure;
-input = [1/18 17/18; 2/4 2/4];
-X = [1 2];
-N = [18 4];
+input = [5/16 11/16; 14/21 7/21];
+X = [5 14];
+N = [16 21];
 b = bar(input, 'stacked');
 [h,p, chi2stat,df] = prop_test(X , N, false);
 suptitle(sprintf('chi2=%.4f', p));
 set(gca, 'xTickLabel', {'Striosomal', 'Matrix'});
 ylabel('SPN Response Type (%)');
-legend('Gain', 'Filter');
+legend('SNR Decay', 'Enhanced SNR');

@@ -38,3 +38,15 @@ for jj=1:NUM_RASTERS
 
 end
 sgtitle(sprintf('swn idx=%d, msn idx=%d, msn striosomality=%d', swn_idx, msn_idx, twdb_control(msn_idx).striosomality2_type));
+
+%% This is for the snr stats with chisquare test
+f2 = figure;
+input = [1/18 17/18; 2/4 2/4];
+X = [1 2];
+N = [18 4];
+b = bar(input, 'stacked');
+[h,p, chi2stat,df] = prop_test(X , N, false);
+suptitle(sprintf('chi2=%.4f', p));
+set(gca, 'xTickLabel', {'Striosomal', 'Matrix'});
+ylabel('SPN Response Type (%)');
+legend('SNR Decay', 'Enhanced SNR');
